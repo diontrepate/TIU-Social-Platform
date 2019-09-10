@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
+
 export interface Person {
 
  name: string;
 }
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +18,10 @@ export interface Person {
 export class ApiService {
   constructor(private http: HttpClient) { }
 
+
+
   getAllPeople(): Observable<Person> {
-    return this.http.get<Person>('http://localhost:8000/api/people');
+    return this.http.get<Person>('http://localhost:3001/api/people');
   }
 
 

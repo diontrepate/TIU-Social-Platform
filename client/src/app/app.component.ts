@@ -1,5 +1,6 @@
 import { ApiService, Person } from './services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,22 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-// this and the app.html are the root components, 
+// this and the app.html are the root components,
 // because these are at the highest level whatever happens here
 // will be seen across all child components created.
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+
+  firstSubscription: Subscription;
+  title =  "TIU Social Platform";
+  data: Person;
 
   constructor(private apiService: ApiService) {
-    this.apiService.getAllPeople().subscribe(retrievedObject => {
+    this.firstSubscription = this.apiService.getAllPeople().subscribe(retrievedObject => {
       this.data = retrievedObject;
       console.log(this.data.name);
       });
    }
 
-  title =  "TIU Social Platform";
-  data: Person;
+ 
 
-  ngOnInit() {
+  ngOnInit(): void {
 
+  }
+
+  ngOnDestroy(): void {
+    this.firstSubscription.unsubscribe();
   }
 }
