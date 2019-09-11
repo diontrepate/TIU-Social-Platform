@@ -1,4 +1,0 @@
-[{
-    carlos: "commander",
-    dillon: "gay"
-}]
