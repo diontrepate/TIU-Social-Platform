@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
@@ -14,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   isResetPassword: boolean;
   isSignUpSection: boolean;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
@@ -32,6 +33,8 @@ export class LoginPageComponent implements OnInit {
       confirmPass: ['', [Validators.required, Validators.minLength(10)]]
     })
   }
+
+  get loginInfo() { return this.loginForm.controls; }
 
   ngOnInit() {
     this.isLoginSection = true;
@@ -57,6 +60,15 @@ export class LoginPageComponent implements OnInit {
     this.isLoginSection = false;
     this.isResetPassword = false;
     this.isSignUpSection = true;
+  }
+
+  authenticate() {
+  this.authService.validateUser(this.loginInfo.name.value, this.loginInfo.password.value);
+  
+  }
+
+  navToLanding() {
+
   }
 
 }

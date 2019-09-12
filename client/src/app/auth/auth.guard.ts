@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   constructor(  private authService: AuthService, private router: Router) { }
 
   canActivate( state: RouterStateSnapshot ): boolean {
-    if (this.authService.validateUser() === true) {
+    if (this.authService.isValidated === true) {
       return true;
     } else {
       this.router.navigate(['/login']);
@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
 
     }
 
-    console.log('AuthGuard#canActivate called');
   }
 
 }
