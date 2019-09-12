@@ -8,18 +8,54 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
-  isLoggedIn = true;
-  constructor(private fb: FormBuilder) { 
+  forgotPassForm: FormGroup;
+  signUpForm: FormGroup;
+  isLoginSection: boolean;
+  isResetPassword: boolean;
+  isSignUpSection: boolean;
+
+  constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      name: ['', Validators.required],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+
+    this.forgotPassForm = this.fb.group({
       email: ['', [Validators.required]],
     });
+
+    this.signUpForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required]],
+      password: ['',  [Validators.required]],
+      confirmPass: ['', [Validators.required]]
+    })
   }
 
   ngOnInit() {
+    this.isLoginSection = true;
   }
 
-  here(){
+  resetFields() {
+    this.isResetPassword = false;
+    this.isSignUpSection = false;
+    this.isLoginSection = true;
+  }
+
+  here() {
+    // here for testing but eventially would be a routerLink
     console.log(this.loginForm.get('email').value);
   }
+
+  forgotPassword() {
+    this.isLoginSection = false;
+    this.isResetPassword = true;
+  }
+
+  signUp() {
+    this.isLoginSection = false;
+    this.isResetPassword = false;
+    this.isSignUpSection = true;
+  }
+
 }
