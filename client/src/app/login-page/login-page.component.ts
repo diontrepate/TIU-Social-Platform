@@ -15,20 +15,21 @@ export class LoginPageComponent implements OnInit {
   isSignUpSection: boolean;
 
   constructor(private fb: FormBuilder) {
+
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(10)]],
     });
 
     this.forgotPassForm = this.fb.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.minLength(5)]],
     });
 
     this.signUpForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required]],
-      password: ['',  [Validators.required]],
-      confirmPass: ['', [Validators.required]]
+      name: ['', Validators.required, Validators.minLength(3)],
+      email: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['',  [Validators.required, Validators.minLength(10)]],
+      confirmPass: ['', [Validators.required, Validators.minLength(10)]]
     })
   }
 
