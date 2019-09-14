@@ -1,6 +1,8 @@
+import { NEWSAPI, CATEGORY, SORTBY, APIKEY } from './../HTTP/Rest/Keys/Constants/endpoints';
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { EverythingNews } from '../models/newsEverything';
 
 
 export interface Person {
@@ -18,6 +20,9 @@ export interface Person {
 export class ApiService {
   constructor(private http: HttpClient) { }
 
+  getNews(category: string, sortBy: string): Observable<EverythingNews> {
+    return this.http.get<EverythingNews>(NEWSAPI + CATEGORY + category + SORTBY + sortBy + APIKEY);
+  }
 
 
   getAllPeople(): Observable<Person> {

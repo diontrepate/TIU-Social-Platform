@@ -1,3 +1,8 @@
-<p>
-  landing-page works!
-</p>
+
+<!-- Just for testing purposes -->
+
+
+        <li  *ngFor="let p of news.articles" >
+          <p>{{p?.description}}</p>
+            <img style="width:25%"  src="{{p?.urlToImage}}" />
+        </li>

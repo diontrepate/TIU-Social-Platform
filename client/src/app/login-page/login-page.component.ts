@@ -64,7 +64,6 @@ export class LoginPageComponent implements OnInit {
 
   authenticate() {
   this.authService.validateUser(this.loginInfo.name.value, this.loginInfo.password.value);
-  
   }
 
   navToLanding() {
