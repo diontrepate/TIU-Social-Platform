@@ -18,10 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   data: Person;
 
   constructor(private apiService: ApiService) {
-    this.firstSubscription = this.apiService.getAllPeople().subscribe(retrievedObject => {
-      this.data = retrievedObject;
-      console.log(this.data.name);
-      });
+  
    }
 
  

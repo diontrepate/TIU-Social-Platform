@@ -1,6 +1,7 @@
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { EverythingNews } from '../models/newsEverything';
+import { UserApiService } from '../services/UserApiService';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,14 +11,15 @@ import { EverythingNews } from '../models/newsEverything';
 export class LandingPageComponent implements OnInit {
 news: EverythingNews;
 
-  constructor(apiService: ApiService) { 
-    apiService.getNews('Math','popular').subscribe(news => {
+  constructor(userApiService: UserApiService) { 
+    userApiService.getNews('Mathematics','popular').subscribe(news => {
       this.news = news;
       console.log(news);
     });
   }
 
   ngOnInit() {
+    // nothing to do here
   }
 
 }
