@@ -1,25 +1,93 @@
+import { MessageService } from 'primeng/api';
+import { Auth } from './../models/authModel';
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
+
 export class LoginPageComponent implements OnInit {
+
   loginForm: FormGroup;
-  isLoggedIn = true;
-  constructor(private fb: FormBuilder) { 
+  forgotPassForm: FormGroup;
+  signUpForm: FormGroup;
+  isLoginSection: boolean;
+  isResetPassword: boolean;
+  isSignUpSection: boolean;
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private messageService: MessageService) {
+
     this.loginForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(10)]],
     });
+
+    this.forgotPassForm = this.fb.group({
+      email: ['', [Validators.required, Validators.minLength(5)]],
+    });
+
+    this.signUpForm = this.fb.group({
+      name: ['', Validators.required, Validators.minLength(3)],
+      email: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['',  [Validators.required, Validators.minLength(10)]],
+      confirmPass: ['', [Validators.required, Validators.minLength(10)]]
+    })
   }
+
+  userAuth: Auth;
+
+  get loginInfo() { return this.loginForm.controls; }
 
   ngOnInit() {
+    this.isLoginSection = true;
   }
 
-  here(){
-    console.log(this.loginForm.get('email').value);
+  resetFields() {
+    this.isResetPassword = false;
+    this.isSignUpSection = false;
+    this.isLoginSection = true;
   }
-}
+
+  here() {
+    // here for testing but eventially would be a routerLink
+  }
+
+  login() {
+    this.userAuth = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    };
+
+    this.authService.validateUser(this.userAuth).subscribe(userAuth => console.log(userAuth, + '' + 'Login Successful'),
+    err => (
+      console.log(err),
+      this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'})
+    ));
+
+  }
+
+  forgotPassword() {
+    this.isLoginSection = false;
+    this.isResetPassword = true;
+  }
+
+  signUp() {
+    this.isLoginSection = false;
+    this.isResetPassword = false;
+    this.isSignUpSection = true;
+  }
+
+  authenticate() {}
+
+  navToLanding() {}
+
+
+
+
+
+
+  }
