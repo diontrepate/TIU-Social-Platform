@@ -7,14 +7,15 @@ import { UserApiService } from '../services/UserApiService';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
+
 export class LandingPageComponent implements OnInit {
 
   news: EverythingNews;
 
   constructor(userApiService: UserApiService) {
     userApiService.getNews('Mathematics', 'popular').subscribe(news => {
-      this.news = news;
-      console.log(news);
+    this.news = news;
+    console.log(news);
     });
   }
 

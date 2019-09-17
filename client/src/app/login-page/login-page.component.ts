@@ -1,3 +1,5 @@
+import { Auth } from './../models/authModel';
+import { User } from './../models/user';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -36,6 +38,8 @@ export class LoginPageComponent implements OnInit {
     })
   }
 
+  userAuth: Auth;
+
   get loginInfo() { return this.loginForm.controls; }
 
   ngOnInit() {
@@ -50,7 +54,17 @@ export class LoginPageComponent implements OnInit {
 
   here() {
     // here for testing but eventially would be a routerLink
-    console.log(this.loginForm.get('email').value);
+  }
+
+  login() {
+    this.userAuth = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    }
+    //localhost:5000/auth/v1/user/sign-in
+    this.authService.validateUser(this.userAuth).subscribe(userAuth => console.log(userAuth + '' + 'Login Successful'),
+    err => console.log('connection error'));
+
   }
 
   forgotPassword() {
@@ -65,7 +79,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   authenticate() {
-  this.authService.validateUser(this.loginInfo.name.value, this.loginInfo.password.value);
   }
 
   navToLanding() {
