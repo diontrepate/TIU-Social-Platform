@@ -31,7 +31,7 @@ export class AuthService {
 
 
   validateUser(userAuth: Auth): Observable<Auth> {
-
+    
     return this.http.post<Auth>('http://localhost:5000/auth/v1/users/sign-in', userAuth);
 
     // all this will change instead the toast should be in auth guard and I should only check the
@@ -44,5 +44,11 @@ export class AuthService {
     // } else {
     // return true;
     // }
+  }
+
+  getUserInfoById(id: string): Observable<User> {
+
+    return this.http.post<User>('url', id);
+
   }
 }
