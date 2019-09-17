@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Auth } from './../models/authModel';
 import { User } from './../models/user';
 import { AuthService } from './../services/auth.service';
@@ -19,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   isResetPassword: boolean;
   isSignUpSection: boolean;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private messageService: MessageService) {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
@@ -63,7 +64,9 @@ export class LoginPageComponent implements OnInit {
     }
     //localhost:5000/auth/v1/user/sign-in
     this.authService.validateUser(this.userAuth).subscribe(userAuth => console.log(userAuth + '' + 'Login Successful'),
-    err => console.log('connection error'));
+    err => (
+      this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'})
+    ));
 
   }
 
