@@ -1,6 +1,5 @@
 import { MessageService } from 'primeng/api';
 import { Auth } from './../models/authModel';
-import { User } from './../models/user';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -61,10 +60,11 @@ export class LoginPageComponent implements OnInit {
     this.userAuth = {
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
-    }
-    //localhost:5000/auth/v1/user/sign-in
-    this.authService.validateUser(this.userAuth).subscribe(userAuth => console.log(userAuth + '' + 'Login Successful'),
+    };
+
+    this.authService.validateUser(this.userAuth).subscribe(userAuth => console.log(userAuth, + '' + 'Login Successful'),
     err => (
+      console.log(err),
       this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'})
     ));
 
@@ -81,11 +81,13 @@ export class LoginPageComponent implements OnInit {
     this.isSignUpSection = true;
   }
 
-  authenticate() {
+  authenticate() {}
+
+  navToLanding() {}
+
+
+
+
+
+
   }
-
-  navToLanding() {
-
-  }
-
-}

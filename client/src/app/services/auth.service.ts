@@ -26,18 +26,17 @@ export class AuthService {
 
    public get currentUserValue(): User {
     return this.currentUserSubject.value;
-  }
+   }
   // need to use Behavior subject to hold on to values for all components to use
 
 
   validateUser(userAuth: Auth): Observable<Auth> {
 
-    return this.http.post<Auth>('localhost:5000/auth/v1/user/sign-in', userAuth);
+    return this.http.post<Auth>('http://localhost:5000/auth/v1/users/sign-in', userAuth);
 
-    // all this will change instead the toast should be in auth guard and I should only check the 
+    // all this will change instead the toast should be in auth guard and I should only check the
     // variable isValidated from the auth guard This should just serve as a call to check for status
-    
-    
+
     // if (this.isValidated === false) {
 
     //   this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'});
