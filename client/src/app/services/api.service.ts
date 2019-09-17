@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
-
-export interface Person {
-
- name: string;
-}
-
-
 @Injectable({
   providedIn: 'root'
 })

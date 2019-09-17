@@ -1,13 +1,15 @@
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
+
 export class LoginPageComponent implements OnInit {
+
   loginForm: FormGroup;
   forgotPassForm: FormGroup;
   signUpForm: FormGroup;

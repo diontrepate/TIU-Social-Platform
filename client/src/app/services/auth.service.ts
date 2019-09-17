@@ -25,7 +25,7 @@ export class AuthService {
 
    public get currentUserValue(): User {
     return this.currentUserSubject.value;
-}
+  }
   // need to use Behavior subject to hold on to values for all components to use
 
 

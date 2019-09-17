@@ -9,6 +9,7 @@
 <div class = "loginInteract">
 
 <form *ngIf="isLoginSection" [formGroup]="loginForm">
+
     <br>
     <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" required pInputText /> 
     <br>
@@ -20,6 +21,7 @@
     <button style="margin: auto; margin-top: 10px; display: block; width: 90%" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="here()" class="ui-button-rounded" (click)="here()"></button>
     <br>
     <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Sign Up" (click)="signUp()" class="ui-button-rounded"></button>
+
 </form>
 
 <form *ngIf="isResetPassword" [formGroup]="forgotPassForm">
@@ -34,6 +36,7 @@
 </form>
 
 <form *ngIf="isSignUpSection" [formGroup]="signUpForm">
+    
         <h1 style="text-align: center; display:block;">Create an Account</h1>
         <br>
         <input style="width:90%;" formControlName="name" type="text"  placeholder="Name" pInputText /> 
