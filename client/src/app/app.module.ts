@@ -11,6 +11,13 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'primeng/carousel';
+import {SidebarModule} from 'primeng/sidebar';
+import {MenuModule} from 'primeng/menu';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CardModule} from 'primeng/card';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CarouselModule,
+    SidebarModule,
+    MenuModule,
+    InputTextareaModule,
+    CardModule,
+    DialogModule,
+    DropdownModule
   ],
 
   providers: [MessageService],

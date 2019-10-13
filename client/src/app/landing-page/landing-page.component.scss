@@ -1,0 +1,71 @@
+::ng-deep body .ui-carousel .ui-carousel-header {
+background-color:rgba(216, 7, 7, 0.233);
+}
+
+body {
+    background-color: rgba(48, 43, 43, 0.781);   
+}
+
+.topBar {
+    background-color: blue;
+    top: 0%;
+    right: 1px;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    overflow: hidden;
+    z-index: 1;
+
+}
+
+.newsChange {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    position: relative;
+}
+
+.carousel {
+    background-color: blue;
+    width: 100%;
+    height: 40%;
+    top: 10px;
+    margin-top: 40px;
+    position: relative;
+}
+
+.addPost {
+    width: 60%;
+    height: 250px;
+    top: 40px;
+    border: solid red 2px;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.feedContainer {
+    border: solid red 2px;
+    width: 100%;
+    
+    height: 1000px;
+    top: 50px;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+}
+
+.feed {
+    background-color: red;
+    width:50%;
+    height: 200px;
+    top: 40px;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.animateFeed {
+}
+
