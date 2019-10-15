@@ -1,8 +1,81 @@
+<div class="topBar">
+        <button pButton type="button" (click)="visibleSidebar1 = true" style="font-size: 1.3em" icon="pi pi-bars"></button>
+        <button pButton type="button" (click)="display = true" style="margin-left: 20px;" label="Change News Feed"></button>
+    
+    </div>
 
-<!-- Just for testing purposes -->
+<p-dialog [formGroup]="dropDown" header="Title" [style]="{width: '300px', height: '200px'}" [(visible)]="display">
+    <div class="newsChange">
+        <p-dropdown [options]="topics" formControlName="selectedTopic"></p-dropdown>
+        <button pButton label="Submit" (click)="updateNews()"></button>
+    </div>
+</p-dialog>
 
 
-        <li  *ngFor="let p of news.articles" >
-          <p>{{p?.description}}</p>
-            <img style="width:25%"  src="{{p?.urlToImage}}" />
-        </li>
+<div class="carousel">
+    <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
+        <ng-template let-item pTemplate="item">
+            <div class="ui-grid ui-grid-responsive" style="background-color:rgba(29, 23, 23, 0.233)">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12">
+                        <div style="width:300px; margin-left:5px; height: 100px; position: relative; text-align: center; top: 10px"> <a href={{item.link}} target="_blank"> <img  width="250px" height="150px" src="{{item.linkToImage}}" /></a> </div> 
+      
+                    </div>
+                </div>
+      
+      
+                    <div style="width:300px; margin-left:5px; height: 240px; position: relative; top: 65px"><a href={{item.link}} target="_blank"> <p style="color:rgb(22, 22, 22)">{{item.description}}</p> </a></div>
+               
+              </div>
+        </ng-template>
+      </p-carousel>
+</div>
+
+<div class="addPost" [formGroup]="postForm"> 
+    <textarea style="margin: auto; margin-top:10px; display: block; height: 70%; width: 50%;" formControlName="post" placeholder="Type Post" pInputTextarea ></textarea> <br>
+    <button pButton style="margin: auto; display: block; " type="button" label="Post" (click)="submitPost(); isFeed = true" class="ui-button-secondary"></button>
+</div>
+
+
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+    <h1 style="font-weight:normal">Left Sidebar</h1>
+    <button pButton type="button" (click)="visibleSidebar1 = false" label="Profile" class="ui-button-secondary"></button><br>
+    <button pButton type="button" (click)="visibleSidebar1 = false" label="Feed" class="ui-button-secondary"></button><br>
+    <button pButton type="button" (click)="visibleSidebar1 = false" label="Settings" class="ui-button-secondary"></button>
+</p-sidebar>
+
+<div class="feedContainer">
+    <div *ngFor="let posts of feedStorage; let i = index" > 
+
+        <p-card *ngIf="isFeed && i%2==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
+            <p-header>
+                photo of user who posted or avatar
+                <!-- <img src="Card" src="assets/showcase/images/usercard.png"> -->
+
+            </p-header>
+         <div> {{posts}} </div>
+            <p-footer>
+                <i class="pi pi-thumbs-up"></i>
+
+                <i class="pi pi-thumbs-down"></i>
+            </p-footer>
+        </p-card>
+
+        <p-card *ngIf="isFeed && i%2!==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'60%', marginTop:'5%'}" styleClass="ui-card-shadow">
+            <p-header>
+                photo of user who posted or avatar
+                <!-- <img src="Card" src="assets/showcase/images/usercard.png"> -->
+
+            </p-header>
+         <div> {{posts}} </div>
+            <p-footer>
+                <i class="pi pi-thumbs-up"></i>
+
+                <i class="pi pi-thumbs-down"></i>
+            </p-footer>
+        </p-card>
+        
+    </div>
+</div>
+
+     

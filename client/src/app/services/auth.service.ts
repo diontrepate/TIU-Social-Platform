@@ -1,3 +1,4 @@
+import { CORS_PREFIX, SIGN_IN, SIGN_UP, FORGOT_PASSWORD_EMAIL } from './../HTTP/Rest/Keys/Constants/endpoints';
 import { Auth } from './../models/authModel';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -29,20 +30,14 @@ export class AuthService {
    }
   // need to use Behavior subject to hold on to values for all components to use
 
+  validateUser(userAuth: Auth, isFirstTime: boolean): Observable<Auth> {
+    if (isFirstTime) {
+      return this.http.post<Auth>(CORS_PREFIX + SIGN_UP, userAuth);
+    }
+    return this.http.post<Auth>(CORS_PREFIX + SIGN_IN, userAuth);
+  }
 
-  validateUser(userAuth: Auth): Observable<Auth> {
-
-    return this.http.post<Auth>('http://localhost:5000/auth/v1/users/sign-in', userAuth);
-
-    // all this will change instead the toast should be in auth guard and I should only check the
-    // variable isValidated from the auth guard This should just serve as a call to check for status
-
-    // if (this.isValidated === false) {
-
-    //   this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'});
-    //   return false;
-    // } else {
-    // return true;
-    // }
+  sendPasswordResetEmail(userAuth: Auth): Observable<Auth> {
+    return this.http.post<Auth>(CORS_PREFIX + FORGOT_PASSWORD_EMAIL , userAuth);
   }
 }

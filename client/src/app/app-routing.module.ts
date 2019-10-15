@@ -10,7 +10,9 @@ const routes: Routes = [
   redirectTo: '/login',
   pathMatch: 'full'
   },
+  { path: 'landing/:id', component: LandingPageComponent, canActivate: [AuthGuard] },
   { path: 'landing', component: LandingPageComponent, canActivate: [AuthGuard] },
+
 ];
 
 @NgModule({
