@@ -1,4 +1,4 @@
-import { CORS_PREFIX, SIGN_IN, SIGN_UP, CONFIRMATION_EMAIL, FORGOT_PASSWORD_EMAIL } from './../HTTP/Rest/Keys/Constants/endpoints';
+import { CORS_PREFIX, SIGN_IN, SIGN_UP, FORGOT_PASSWORD_EMAIL } from './../HTTP/Rest/Keys/Constants/endpoints';
 import { Auth } from './../models/authModel';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -37,7 +37,7 @@ export class AuthService {
     return this.http.post<Auth>(CORS_PREFIX + SIGN_IN, userAuth);
   }
 
-  sendConfEmailForPass(userAuth: Auth): Observable<Auth> {
+  sendPasswordResetEmail(userAuth: Auth): Observable<Auth> {
     return this.http.post<Auth>(CORS_PREFIX + FORGOT_PASSWORD_EMAIL , userAuth);
   }
 }

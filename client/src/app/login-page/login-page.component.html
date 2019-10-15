@@ -13,7 +13,7 @@
     <br>
     <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" required pInputText /> 
     <br>
-    <input style="width:90%;" formControlName="password" type="text" placeholder="Password" pInputText/>
+    <input style="width:90%;" formControlName="password" type="text" placeholder="Password" required pInputText/>
     <br>
     <a style="padding-left: 5%;" (click)="forgotPassword()">Forgot Password?</a>
     <br>
@@ -31,7 +31,7 @@
     <br>
     <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" pInputText /> 
     <br>
-    <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Reset Password" class="ui-button-rounded" (click)="forgotPassEmail()"></button>
+    <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Reset Password" class="ui-button-rounded" (click)="forgotPasswordEmail()"></button>
 </form>
 
 <form *ngIf="isPassordEmailSent">

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
-  forgotPassForm: FormGroup;
+  forgotPasswordForm: FormGroup;
   signUpForm: FormGroup;
 
   isLoginSection: boolean;
@@ -24,22 +24,22 @@ export class LoginPageComponent implements OnInit {
   isJustRegistered: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private messageService: MessageService) {
-
+    // will work on REGEX for password soon
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
-      password: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(1)]],
     });
 
-    this.forgotPassForm = this.fb.group({
+    this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
     });
 
     this.signUpForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      firstName: ['', [Validators.required, Validators.minLength(1)]],
+      lastName: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.required, Validators.minLength(5)]],
-      password: ['',  [Validators.required, Validators.minLength(10)]],
-      confirmPass: ['', [Validators.required, Validators.minLength(10)]]
+      password: ['',  [Validators.required, Validators.pattern('/^[A-Za-z]\w{7,14}$/')]],
+      confirmPass: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -49,21 +49,21 @@ export class LoginPageComponent implements OnInit {
     this.isLoginSection = true;
   }
 
-  forgotPassEmail() {
+  forgotPasswordEmail() {
 
     this.userAuth = {
-      email: this.forgotPassForm.get('email').value,
+      email: this.forgotPasswordForm.get('email').value,
     };
     this.isPassordEmailSent = true;
 
-    this.authService.sendConfEmailForPass(this.userAuth).subscribe( emailSent => {
-    this.forgotPassForm.reset();
+    this.authService.sendPasswordResetEmail(this.userAuth).subscribe( emailSent => {
+    this.forgotPasswordForm.reset();
     this.isPassordEmailSent = true;
     return this.messageService.add({key: 'login', severity: 'success', summary: 'Email Sent', detail: 'Email confirmation email has been sent'});
 
     },
     err => {
-      this.forgotPassForm.reset();
+      this.forgotPasswordForm.reset();
       return this.messageService.add({key: 'login', severity: 'error', summary: 'Error', detail: 'An internal error has occurred'});
   }
     );
