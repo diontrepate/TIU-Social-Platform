@@ -1,30 +1,43 @@
 .mainBanner {
     width: 100%;
-    height: 100px;
+    height: 75px;
+    background-color:rgb(25, 0, 255);
     position: absolute;
+
+    #example1 {
+        border: 1px solid black;
+        background-image: url(/assets/Trintiy_Banner.jpg);
+        background-size: 100px 30px;
+        background-repeat: no-repeat;
+        padding:15px;
+      }
+    
 }
 
 hr {
     width: 100%;
+    height: 25px;
     border-color: black;
-    margin-top: 100px;
+    margin-top: 75px;
 }
 
 
 .login {
     position: absolute;
-    margin-top: 30px;
+    margin-top: 23px;
     right: 80px;
 }
 
 .loginInteract {
     position: relative;
-    width: 50%;
-    height: 450px;
-    border: 1px solid black;
-    border-radius: 5px;
+    width: 60%;
+    height: 350px;
+    border: 1px solid blue;
+    border-radius: 30px;
     top: 120px;
     margin: auto;
+    
+    
 }
 
 input {

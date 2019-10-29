@@ -1,5 +1,7 @@
 <div class = "mainBanner">
+       <div id = "example1"></div> 
 <div class = "login">
+   
 <button pButton type="button" label="Login" class="ui-button-rounded" (click)="resetFields()"></button>
 
 </div>
@@ -11,16 +13,17 @@
 <form *ngIf="isLoginSection" [formGroup]="loginForm">
 
     <br>
-    <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" required pInputText /> 
+    <input style="width:90%;" formControlName="email" type="text"  placeholder="Email/Username" required pInputText /> 
     <br>
     <input style="width:90%;" formControlName="password" type="text" placeholder="Password" pInputText/>
     <br>
-    <a style="padding-left: 5%;" (click)="forgotPassword()">Forgot Password?</a>
+    <a style="padding-left: 65%; color:red" (click)="forgotPassword()">Forgot Password?</a>
 
     <br>
-    <button style="margin: auto; margin-top: 10px; display: block; width: 90%" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="login()" class="ui-button-rounded" (click)="here()"></button>
+    <button style="margin: auto; margin-top: 10px; display: block; width: 50%" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="login()" class="ui-button-rounded" (click)="here()"></button>
     <br>
-    <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Sign Up" (click)="signUp()" class="ui-button-rounded"></button>
+    <button style="margin: auto; display: block; width: 50%" pButton type="button" label="Create Account" (click)="signUp()" class="ui-button-rounded"></button>
+
 
 </form>
 
@@ -47,7 +50,7 @@
         <br>
         <input style="width:90%;" formControlName="confirmPass" type="text" placeholder="Confirm Password" pInputText />
         <br>
-        <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Sign Up" (click)="here()" class="ui-button-rounded"></button>
+        <button style="margin: auto; display: block; width: 50%" pButton type="button" label="Create Account" (click)="here()" class="ui-button-rounded"></button>
 
 </form>
 
