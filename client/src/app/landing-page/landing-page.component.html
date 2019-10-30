@@ -16,17 +16,16 @@
     <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
         <ng-template let-item pTemplate="item">
             <div class="ui-grid ui-grid-responsive" style="background-color:rgba(29, 23, 23, 0.233)">
+
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-12">
                         <div style="width:300px; margin-left:5px; height: 100px; position: relative; text-align: center; top: 10px"> <a href={{item.link}} target="_blank"> <img  width="250px" height="150px" src="{{item.linkToImage}}" /></a> </div> 
-      
                     </div>
-                </div>
-      
-      
+                </div> 
+
                     <div style="width:300px; margin-left:5px; height: 240px; position: relative; top: 65px"><a href={{item.link}} target="_blank"> <p style="color:rgb(22, 22, 22)">{{item.description}}</p> </a></div>
                
-              </div>
+            </div>
         </ng-template>
       </p-carousel>
 </div>
@@ -77,5 +76,3 @@
         
     </div>
 </div>
-
-     

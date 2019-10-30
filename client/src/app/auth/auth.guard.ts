@@ -12,7 +12,7 @@ export class AuthGuard {
   constructor( private authService: AuthService, private router: Router ) { }
 
   canActivate( state: RouterStateSnapshot ): boolean {
-    return true;
+    // return true;
     if (this.authService.isValidated === true) {
       return true;
     } else {

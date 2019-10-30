@@ -1,10 +1,11 @@
-import { CORS_PREFIX, SIGN_IN, SIGN_UP, FORGOT_PASSWORD_EMAIL } from './../HTTP/Rest/Keys/Constants/endpoints';
+import { SIGN_IN, SIGN_UP, FORGOT_PASSWORD_EMAIL } from './../HTTP/Rest/Keys/Constants/endpoints';
 import { Auth } from './../models/authModel';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +33,12 @@ export class AuthService {
 
   validateUser(userAuth: Auth, isFirstTime: boolean): Observable<Auth> {
     if (isFirstTime) {
-      return this.http.post<Auth>(CORS_PREFIX + SIGN_UP, userAuth);
+      return this.http.post<Auth>(SIGN_UP, userAuth);
     }
-    return this.http.post<Auth>(CORS_PREFIX + SIGN_IN, userAuth);
+    return this.http.post<Auth>(SIGN_IN, userAuth);
   }
 
   sendPasswordResetEmail(userAuth: Auth): Observable<Auth> {
-    return this.http.post<Auth>(CORS_PREFIX + FORGOT_PASSWORD_EMAIL , userAuth);
+    return this.http.post<Auth>(FORGOT_PASSWORD_EMAIL , userAuth);
   }
 }
