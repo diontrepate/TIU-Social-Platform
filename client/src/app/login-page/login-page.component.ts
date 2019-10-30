@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(1)]],
       lastName: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.required, Validators.minLength(5)]],
-      password: ['',  [Validators.required, Validators.pattern('/^[A-Za-z]\w{7,14}$/')]],
+      password: ['',  [Validators.required, Validators.minLength(5)]],
       confirmPass: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
@@ -86,10 +86,10 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.userAuth = {
-      email: this.loginForm.get('email').value,
-      password: this.loginForm.get('password').value,
-      firstName: this.loginForm.get('firstName').value,
-      lastName: this.loginForm.get('lastName').value,
+      email: this.signUpForm.get('email').value,
+      password: this.signUpForm.get('password').value,
+      firstName: this.signUpForm.get('firstName').value,
+      lastName: this.signUpForm.get('lastName').value,
     };
 
     this.callAuth(this.userAuth, true);
@@ -107,6 +107,7 @@ export class LoginPageComponent implements OnInit {
     },
 
     err => {
+      console.log(err);
       this.signUpForm.reset(),
       this.loginForm.reset(),
 
