@@ -24,6 +24,8 @@ export class LandingPageComponent implements OnInit {
 
   feedStorage = [];
 
+  user: User;
+
   post: string;
   userId: string;
 
@@ -49,6 +51,17 @@ export class LandingPageComponent implements OnInit {
                   selectedTopic: ''
                 });
 
+                this.user = {
+                    id: 1,
+                    username: 'diontrepate',
+                    email: 'dpate@j.com',
+                    password: 'cereal',
+                    firstName: 'diontre',
+                    lastName: 'pate',
+                    groups: ['math', 'english','science'],
+                    posts: ['Hey man how are you?', 'its Lit', 'heyyyyy'],
+                  }
+                
                 this.topics = [
                   {label: '', value: ''},
                   {label: 'Sports', value: 'Sports'},
@@ -59,7 +72,8 @@ export class LandingPageComponent implements OnInit {
 
                 this.userId = this.route.snapshot.paramMap.get('id');
 
-                this.userApiService.getUserInfoById(this.userId).subscribe(userInfo => {
+                this.userApiService.getUserInfoById(this.user).subscribe(userInfo => {
+                  console.log(userInfo);
       this.userInfo = userInfo;
     });
 
@@ -86,7 +100,9 @@ export class LandingPageComponent implements OnInit {
 
  
   }
-
+  test() {
+    console.log("here")
+  }
   submitPost() {
     this.post = this.postForm.get('post').value;
     this.feedStorage.push(this.post);
