@@ -4,15 +4,15 @@
     </div>
 
     <div class="dropDown">
-        <p-dropdown [options]="topics" placeholder="Name" optionLabel="name" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="topics" placeholder="{{user.username}}" optionLabel="name" [showClear]="true"></p-dropdown>
     </div>
 
     </div>
-  
+    
 <div class="sidePanel">
         <div *ngFor="let groups of user.groups; let i = index" > 
 
-                <p-card (click)="test()" header="" [style]="{width: '90%', height:'120px', marginLeft:'5%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                <p-card (click)="test()" header="" [style]="{width: '70%', height:'120px', marginTop:'5%'}" styleClass="ui-card-shadow">
                     <p-header style="margin: 40%">
                             {{user.groups[i]}}
         
@@ -24,23 +24,62 @@
                 </p-card>
                 </div>
 </div>
+<div class="carouselPostWrapper"></div>
+
+
+<div class="addPostContainer">
+    <textarea class="addPost" placeholder="Type your thoughts here..." pInputTextarea></textarea>
+</div>
 
 <div class="carousel">
         <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
                 <ng-template let-item pTemplate="item">
-                    <div class="ui-grid ui-grid-responsive" style="background-color:rgba(29, 23, 23, 0.233)">
+                    <div class="ui-grid ui-grid-responsive" style="background-color:rgba(253, 222, 222, 0.233)">
         
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <div style="width:100%; margin:5px; height: 100px; position: relative; top: 10px"> <a href={{item.link}} target="_blank"> <img  width="90%" height="150px" src="{{item.linkToImage}}" /></a> </div> 
+                                <div style="width:50%; margin:auto; height: 100%;"> <a href={{item.link}} target="_blank"> <img class="crop" src="{{item.linkToImage}}" /></a> </div> 
                             </div>
                         </div> 
         
-                            <div style="width:90%; text-align: center; margin-left:5px; height: 160px; position: relative; top: 65px"><a href={{item.link}} target="_blank"> <p style="color:rgb(22, 22, 22)">{{item.description}}</p> </a></div>
+                            <div style="width:95%;text-align: center; height: 70px; position: relative; top: 10%"><a href={{item.link}} target="_blank"> <p style="color:rgb(22, 22, 22)">{{item.title}}</p></a></div>
                        
                     </div>
                 </ng-template>
               </p-carousel>
+    </div>
+
+
+    <div class="mainBody">
+        <div *ngFor="let posts of feedStorage; let i = index" > 
+
+            <p-card *ngIf="isFeed && i%2==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                <p-header>
+                    photo of user who posted or avatar
+    
+                </p-header>
+             <div> {{posts}} </div>
+                <p-footer>
+                    <i class="pi pi-thumbs-up"></i>
+    
+                    <i class="pi pi-thumbs-down"></i>
+                </p-footer>
+            </p-card>
+    
+            <p-card *ngIf="isFeed && i%2!==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'60%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                <p-header>
+                    photo of user who posted or avatar
+    
+                </p-header>
+             <div> {{posts}} </div>
+                <p-footer>
+                    <i class="pi pi-thumbs-up"></i>
+    
+                    <i class="pi pi-thumbs-down"></i>
+                </p-footer>
+            </p-card>
+            
+        </div>    
     </div>
 
 
