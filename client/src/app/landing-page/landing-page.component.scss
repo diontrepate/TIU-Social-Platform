@@ -1,71 +1,166 @@
 ::ng-deep body .ui-carousel .ui-carousel-header {
 background-color:rgba(216, 7, 7, 0.233);
 }
-
+::ng-deep .ui-dropdown .ui-dropdown-label {
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 400;
+    width: 100%;
+    padding-right: 2.5em;
+}
 body {
-    background-color: rgba(48, 43, 43, 0.781);   
+    background-color: white;  
+     
 }
 
+// the colors below are all place holders it gives me a visual
+
+
 .topBar {
-    background-color: blue;
+    border: solid black 1px;
+    background-color: white;
     top: 0%;
     right: 1px;
     width: 100%;
-    height: 50px;
+    height: 12%;
     position: fixed;
     overflow: hidden;
+    z-index: 4;
+    .imageContainer{
+        left:80%;
+        width: 8%;
+        height: 100%;
+        position: relative;
+        .avatar {
+            margin-top:5%;
+            margin-left:8%;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            position: relative;
+            }
+            
+    }
+    .dropDown {
+        bottom: 70%;
+        left: 88%;
+        position: relative;
+    }
+   
+      
+}
+
+.sidePanel {
+    height: 100%;
+    width: 15%;
+    top: 80px;
+    left: 3%;
+    position: fixed;
+    overflow-y: scroll;
+}
+.carouselPostWrapper {
+    height: 50%;
+    width: 50%;
+    left: 28%;
+    top: 12%;
+    margin-left: 20px;
     z-index: 1;
-
+    position: absolute;
 }
-
-.newsChange {
-    width: 200px;
-    height: 200px;
-    background-color: blue;
-    position: relative;
-}
-
 .carousel {
-    background-color: blue;
-    width: 100%;
-    height: 40%;
-    top: 10px;
-    margin-top: 40px;
-    position: relative;
+    height: 27%;
+    width: 50%;
+    left: 28%;
+    top: 30%;
+    margin-left: 20px;
+    z-index: 1;
+    position: absolute;
+}
+
+// custom class applied to imagas to ensure that they appear the size we want
+.crop {
+    width: 135px;
+    height: 100px;
+}
+
+.addPostContainer {
+    width: 50%;
+    height: 16%;
+    top: 12%;
+    left: 28%;
+    margin-left: 20px;
+    position: fixed;
+    z-index: 5;
 }
 
 .addPost {
-    width: 60%;
-    height: 250px;
-    top: 40px;
-    border: solid red 2px;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.feedContainer {
-    border: solid red 2px;
     width: 100%;
-    
-    height: 1000px;
-    top: 50px;
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    height: 100%;
+}
+
+.mainBody {
+    width: 50%;
+    height: 100%;
+    border: solid black 1px;
+    top: 62%;
+    left: 28%;
+    margin-left: 20px;
+    position: absolute;
     overflow-y: scroll;
+
 }
 
-.feed {
-    background-color: red;
-    width:50%;
-    height: 200px;
-    top: 40px;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
-}
 
-.animateFeed {
-}
+
+
+
+// the commented code below will be used at some point the redesign called for me to start fresh
+
+
+
+
+// .carousel {
+//     background-color: blue;
+//     width: 100%;
+//     height: 40%;
+//     top: 10px;
+//     margin-top: 40px;
+//     position: relative;
+// }
+
+// .addPost {
+//     width: 60%;
+//     height: 250px;
+//     top: 40px;
+//     border: solid red 2px;
+//     position: relative;
+//     margin-right: auto;
+//     margin-left: auto;
+// }
+
+// .feedContainer {
+//     border: solid red 2px;
+//     width: 100%;
+    
+//     height: 1000px;
+//     top: 50px;
+//     position: relative;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
+//     overflow-y: scroll;
+// }
+
+// .feed {
+//     background-color: red;
+//     width:50%;
+//     height: 200px;
+//     top: 40px;
+//     position: relative;
+//     margin-right: auto;
+//     margin-left: auto;
+// }
+
+// .animateFeed {
+// }
 

@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from './../services/auth.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { EverythingNews } from '../models/newsEverything';
 import { UserApiService } from '../services/UserApiService';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { User } from '../models/user';
 import { SelectItem } from 'primeng/api';
 
 export interface Item {
-  description: string;
+  title: string;
   link: string;
   linkToImage: string;
 }
@@ -17,12 +17,14 @@ export interface Item {
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class LandingPageComponent implements OnInit {
 
   feedStorage = [];
+
+  user: User;
 
   post: string;
   userId: string;
@@ -40,7 +42,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor(private userApiService: UserApiService, private route: ActivatedRoute, private authService: AuthService,
               private fb: FormBuilder) {
-                this.feedStorage.push('heyyy','its lit','helllooo');
+                this.feedStorage.push('heyyy', 'its lit', 'helllooo','kdlfj','sdlfhsdjf', 'ldsfhdl');
 
                 this.postForm = this.fb.group({
                   post: ['', ],
@@ -48,6 +50,17 @@ export class LandingPageComponent implements OnInit {
                 this.dropDown = this.fb.group({
                   selectedTopic: ''
                 });
+
+                this.user = {
+                    id: 1,
+                    username: 'diontrepate',
+                    email: 'dpate@j.com',
+                    password: 'cereal',
+                    firstName: 'diontre',
+                    lastName: 'pate',
+                    groups: ['math', 'english', 'science'],
+                    posts: ['Hey man how are you?', 'its Lit', 'heyyyyy'],
+                  };
 
                 this.topics = [
                   {label: '', value: ''},
@@ -59,8 +72,9 @@ export class LandingPageComponent implements OnInit {
 
                 this.userId = this.route.snapshot.paramMap.get('id');
 
-                this.userApiService.getUserInfoById(this.userId).subscribe(userInfo => {
-      this.userInfo = userInfo;
+                this.userApiService.getUserInfoById(this.user).subscribe(userInfo => {
+                  console.log(userInfo);
+                  this.userInfo = userInfo;
     });
 
 
@@ -74,7 +88,7 @@ export class LandingPageComponent implements OnInit {
       for (const item of news.articles) {
 
        this.items.push ({
-        description: item.description,
+        title: item.title,
         link: item.url,
         linkToImage: item.urlToImage
         });
@@ -84,9 +98,11 @@ export class LandingPageComponent implements OnInit {
       this.news = news;
     });
 
- 
-  }
 
+  }
+  test() {
+    console.log('here');
+  }
   submitPost() {
     this.post = this.postForm.get('post').value;
     this.feedStorage.push(this.post);
@@ -102,7 +118,7 @@ export class LandingPageComponent implements OnInit {
 
        this.items.push
        ({
-        description: item.description,
+        title: item.title,
         link: item.url,
         linkToImage: item.urlToImage
         });
@@ -114,4 +130,6 @@ export class LandingPageComponent implements OnInit {
 
     });
   }
+
+  
 }

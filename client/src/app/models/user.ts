@@ -6,4 +6,6 @@ export interface User {
     firstName: string;
     lastName: string;
     token ?: string;
+    groups: string[];
+    posts: string[];
 }
