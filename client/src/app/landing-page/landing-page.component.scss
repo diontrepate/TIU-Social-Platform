@@ -35,21 +35,23 @@ body {
         .avatar {
             margin-top:5%;
             margin-left:8%;
-            width: 80%;
-            height: 80%;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             position: relative;
             }
             
     }
-    .dropDown {
+    .nameLabel {
         bottom: 70%;
-        left: 88%;
+        left: 86%;
+        font-size: 25px;
         position: relative;
     }
    
       
 }
+
 
 .sidePanel {
     height: 100%;

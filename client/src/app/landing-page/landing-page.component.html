@@ -1,35 +1,51 @@
+
 <div class="topBar">
+
     <div class="imageContainer">
-        <img src="assets/avatar.png" (click)="test()" alt="Avatar" class="avatar">
+
+
+        <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">
+        
     </div>
 
-    <div class="dropDown">
-        <p-dropdown [options]="topics" placeholder="{{user.username}}" optionLabel="name" [showClear]="true"></p-dropdown>
-    </div>
+    <div class="nameLabel">
+            {{user.username}}
+        </div>
 
     </div>
+    <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+
     
 <div class="sidePanel">
         <div *ngFor="let groups of user.groups; let i = index" > 
 
-                <p-card (click)="test()" header="" [style]="{width: '70%', height:'120px', marginTop:'5%'}" styleClass="ui-card-shadow">
+                <p-card header="" [style]="{width: '70%', height:'120px', marginTop:'5%'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
                     <p-header style="margin: 40%">
-                            {{user.groups[i]}}
+                            {{user.groups[i].name}}
         
                     </p-header>
-                 <div> {{user.groups[i]}} </div>
+
+                 <div style="margin: 10%"> {{user.groups[i].name}} </div>
+
                     <p-footer>
                 
                     </p-footer>
                 </p-card>
                 </div>
 </div>
-<div class="carouselPostWrapper"></div>
+
+<!------------------------------------------------------------------------------->
+
+
 
 
 <div class="addPostContainer">
     <textarea class="addPost" placeholder="Type your thoughts here..." pInputTextarea></textarea>
 </div>
+
+ <!------------------------------------------Section For Feed When User Lands on Home-------------------------------------------------------------------------->
+
+<div *ngIf="isHome">
 
 <div class="carousel">
         <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
@@ -48,17 +64,18 @@
                 </ng-template>
               </p-carousel>
     </div>
+ 
 
-
+ <!------------------------------------------------------------------------------------------------------------------------->
     <div class="mainBody">
-        <div *ngFor="let posts of feedStorage; let i = index" > 
+        <div *ngFor="let posts of user.posts; let i = index" > 
 
             <p-card *ngIf="isFeed && i%2==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
                 <p-header>
                     photo of user who posted or avatar
     
                 </p-header>
-             <div> {{posts}} </div>
+             <div> {{posts.description}} </div>
                 <p-footer>
                     <i class="pi pi-thumbs-up"></i>
     
@@ -82,10 +99,63 @@
         </div>    
     </div>
 
+</div>
 
+<!------------------------------------------Section For Feed When Group Is Selected-------------------------------------------------------------------------->
 
+<div *ngIf="isGroup">
 
+    <div class="carousel">
+            <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="groupItems">
+                    <ng-template let-item pTemplate="item">
+                        <div class="ui-grid ui-grid-responsive" style="background-color:rgba(253, 222, 222, 0.233)">
+            
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-12">
+                                    <div style="width:50%; margin:auto; height: 100%;"> <a href={{item.link}} target="_blank"> <img class="crop" src="{{item.linkToImage}}" /></a> </div> 
+                                </div>
+                            </div> 
+            
+                                <div style="width:95%;text-align: center; height: 70px; position: relative; top: 10%"><a href={{item.link}} target="_blank"> <p style="color:rgb(22, 22, 22)">{{item.title}}</p></a></div>
+                           
+                        </div>
+                    </ng-template>
+                  </p-carousel>
+        </div>
 
+        <div class="mainBody">
+            <div *ngFor="let posts of groupPassed.posts; let i = index" > 
+    
+                <p-card *ngIf="isFeed && i%2==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                    <p-header>
+                        photo of user who posted or avatar
+        
+                    </p-header>
+                 <div> {{posts.description}} </div>
+                    <p-footer>
+                        <i class="pi pi-thumbs-up"></i>
+        
+                        <i class="pi pi-thumbs-down"></i>
+                    </p-footer>
+                </p-card>
+        
+                <p-card *ngIf="isFeed && i%2!==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'60%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                    <p-header>
+                        photo of user who posted or avatar
+        
+                    </p-header>
+                 <div> {{posts.description}} </div>
+                    <p-footer>
+                        <i class="pi pi-thumbs-up"></i>
+        
+                        <i class="pi pi-thumbs-down"></i>
+                        
+                    </p-footer>
+                </p-card>
+                
+            </div>    
+        </div>
+</div>
 <!--The code below will be used but because of redesign im pulling pieces as needed-->
 
 <!-- <div class="topBar">
