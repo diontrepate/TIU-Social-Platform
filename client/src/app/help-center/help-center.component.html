@@ -1,0 +1,39 @@
+<div class="topBar">
+
+  <div class="imageContainer">
+
+
+      <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">
+      
+  </div>
+  <div class="nameLabel">{{userBlob?.firstName}}</div>
+
+  </div>
+  <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+
+  <div class="helpCenterTitle">
+    
+  </div>
+
+  <!-- <div class="mainBody">
+
+  </div> -->
+
+  
+  
+  <div class="inlineDisplay">
+    <div class="mainLabel"></div>
+    <div class="optionBoxes">Safety</div>
+    <div class="optionBoxes">Privacy</div>
+    <div class="optionBoxes">Report</div>
+    <div class="optionBoxes">Downloads</div>
+
+    <br><br><br><br>
+    
+    <div class="optionBoxes">Communication</div>
+    <div class="optionBoxes">Contact Us</div>
+    <div class="optionBoxes">Breakdown</div>
+    <div class="optionBoxes">Updates</div>
+
+
+  </div>

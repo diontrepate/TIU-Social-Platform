@@ -1,3 +1,4 @@
+import { HelpCenterComponent } from './help-center/help-center.component';
 import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ const routes: Routes = [
   redirectTo: '/login',
   pathMatch: 'full'
   },
+  { path: 'help' , component: HelpCenterComponent},
   { path: 'landing/:id', component: LandingPageComponent, canActivate: [AuthGuard] },
   { path: 'landing', component: LandingPageComponent, canActivate: [AuthGuard] },
 

@@ -34,24 +34,34 @@ body {
         position: relative;
         .avatar {
             margin-top:5%;
-            margin-left:8%;
             width: 70px;
             height: 70px;
             border-radius: 50%;
+            left:80%;
+
             position: relative;
             }
             
     }
     .nameLabel {
-        bottom: 70%;
-        left: 86%;
+        bottom: 92%;
+        left: 92%;
         font-size: 25px;
-        position: relative;
+        position: fixed;
     }
+
    
       
 }
 
+.navToLanding {
+    height: 5%;
+    width: 10%;
+    top: 3%;
+    left: 3%;
+    z-index: 4;
+    position: fixed;
+}
 
 .sidePanel {
     height: 100%;
@@ -160,7 +170,7 @@ body {
 //     top: 40px;
 //     position: relative;
 //     margin-right: auto;
-//     margin-left: auto;
+//     margin-le    ft: auto;
 // }
 
 // .animateFeed {

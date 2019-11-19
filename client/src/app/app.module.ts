@@ -20,14 +20,15 @@ import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
 import {CheckboxModule} from 'primeng/checkbox';
-import {MenuItem} from 'primeng/api';
+import { HelpCenterComponent } from './help-center/help-center.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     LandingPageComponent,
-    PreLandingPageComponent
+    PreLandingPageComponent,
+    HelpCenterComponent
   ],
 
   imports: [

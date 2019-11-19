@@ -1,3 +1,4 @@
+import { CommonAppService } from './../services/common-app.service';
 import { Comment } from './../models/comment';
 import { Post } from './../models/post';
 import { Group } from './../models/Group';
@@ -6,7 +7,7 @@ import { AuthService } from './../services/auth.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EverythingNews } from '../models/newsEverything';
 import { UserApiService } from '../services/UserApiService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/user';
 import { MenuItem } from 'primeng/api';
 
@@ -25,9 +26,14 @@ export interface Item {
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private userApiService: UserApiService, private route: ActivatedRoute, private authService: AuthService,
+  constructor(private userApiService: UserApiService, private commonService: CommonAppService, private router: Router, private route: ActivatedRoute, private authService: AuthService,
               private fb: FormBuilder) {
                 this.feedStorage.push('heyyy', 'its lit', 'helllooo', 'kdlfj', 'sdlfhsdjf', 'ldsfhdl');
+
+                this.addGroupForm = this.fb.group({
+                  name: ['', ],
+                  newsInterest: ['', ]
+                });
 
                 this.postForm = this.fb.group({
                   post: ['', ],
@@ -46,7 +52,7 @@ export class LandingPageComponent implements OnInit {
               };
                 this.thirdPost = {
                   id: '2',
-                  description:'I love CS',
+                  description: 'I love CS',
                   comments: this.comments
                 };
                 this.specificPost.push(this.secondPost);
@@ -83,7 +89,7 @@ export class LandingPageComponent implements OnInit {
                     username: 'diontrepate',
                     email: 'dpate@j.com',
                     password: 'cereal',
-                    firstName: 'diontre',
+                    firstName: 'Diontre',
                     lastName: 'pate',
                     groups: this.groups,
                     posts: this.posts,
@@ -91,17 +97,18 @@ export class LandingPageComponent implements OnInit {
                   };
 
                 this.userId = this.route.snapshot.paramMap.get('id');
-
+                  // wont send the whole user object itll be the id
                 this.userApiService.getUserInfoById(this.user).subscribe(userInfo => {
                   console.log(userInfo);
+                  this.commonService.setUser(userInfo);
                   this.userInfo = userInfo;
                   this.menuItems = [{
                     label: this.userInfo.firstName,
                     items: [
-                    {label: 'Profile', icon: ''},
-                    {label: 'Settings', icon: ''},
-                    {label: 'Help', icon: ''},
-                ]
+                    {label: 'Profile', icon: '', },
+                    {label: 'Settings', icon: '', },
+                    {label: 'Help', icon: '', command: (event: any) => {router.navigate(['/help']); }},
+                           ]
             },
             ];
     });
@@ -137,6 +144,7 @@ export class LandingPageComponent implements OnInit {
   thirdPost: Post;
   secondComment: Comment;
 
+  addGroupForm: FormGroup;
   postForm: FormGroup;
   isHome = true;
   isGroup = false;
@@ -184,20 +192,26 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  
+
   clearArray() {
     while (this.groupItems.length) {
       this.groupItems.pop();
     }
   }
   passCurrentGroup(group: any) {
-    console.log(group)
+    console.log(group);
     this.groupPassed = group;
   }
 
   submitPost() {
     this.post = this.postForm.get('post').value;
-    this.feedStorage.push(this.post);
+    const post: Post = {
+      id: '1',
+      description: this.post,
+      comments: this.comments,
+    };
+
+    this.groupPassed.posts.push(post);
 
     this.postForm.reset();
   }
@@ -209,5 +223,14 @@ export class LandingPageComponent implements OnInit {
   changeName() {}
 
   changePassword() {}
+
+  leaveGroup() {
+    // Call database
+    console.log(this.groupPassed.name);
+  }
+
+  showDialog() {
+    this.display = true;
+}
 
 }
