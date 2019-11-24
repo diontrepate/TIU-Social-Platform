@@ -25,7 +25,6 @@ export class PreLandingPageComponent implements OnInit {
 
   constructor( private authService: AuthService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder ) { 
    
-    console.log("hey");
     this.userId = this.route.snapshot.paramMap.get('id');
 
 
@@ -59,9 +58,8 @@ export class PreLandingPageComponent implements OnInit {
   beginningBanner = true;
   secondStep = false;
 
-  ngOnInit() {
-    console.log("loading");
-  }
+  ngOnInit() {}
+
   sendUserDetails() {
     this.majorsToSend.push(this.selectedMajor);
     this.majorsToSend.push(this.selected2Major);
@@ -74,8 +72,6 @@ export class PreLandingPageComponent implements OnInit {
     };
 
     this.navToLanding();
-
-    console.log(this.userDetails);
 
   }
   
