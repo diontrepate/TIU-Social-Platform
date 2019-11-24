@@ -1,0 +1,32 @@
+<div *ngIf="beginningBanner" class = "Banner">
+  Welcome To Agora!
+  <br>
+  <div style="font-size: 20px; padding-top: 5px;">Please Click Next To Get Started!</div> 
+  <button style="margin: auto; display: inline-block" pButton type="button" label="Next" (click)="beginningBanner=false; secondStep=true" class="ui-button-rounded"></button>
+
+</div>
+
+<div *ngIf="secondStep" class = "welcomeScreen">
+  Please Answer These Questions So We Can Get To Know You Better! <br><br>
+  Please Choose your Major(s);
+  <div class="dropDownBoxContainer">
+      <p-dropdown [style]="{margin: '5%'}" [options]="major" [(ngModel)]="selectedMajor" placeholder="Primary Major" optionLabel="label"></p-dropdown>
+      <p-dropdown [style]="{margin: '5%'}" [options]="major" [(ngModel)]="selected2Major" placeholder="Secondary Major" optionLabel="label"></p-dropdown>
+
+    </div>
+  <br>
+  <form [formGroup]="userDetailsForm">
+    What Is One Thing That Interest You?
+    <input style="width:90%;" formControlName="interest" type="text"  placeholder="interest" required pInputText /> 
+  </form>
+  <br>
+  What Year Are You?
+  <div class="dropDownBoxContainer">
+      <p-dropdown [style]="{margin: '5%'}" [options]="year" [(ngModel)]="selectedYear" placeholder="Year" optionLabel="label"></p-dropdown>
+   </div>
+
+   <button style="top: 10px"  class="ui-button-rounded" (click)="sendUserDetails()" pButton type="button" label="Join"></button>
+
+
+
+</div>

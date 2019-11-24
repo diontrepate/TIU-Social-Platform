@@ -1,0 +1,64 @@
+<div class="topBar">
+
+  <div class="imageContainer">
+
+
+      <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">
+      
+  </div>
+  <div class="nameLabel">{{userBlob?.firstName}}</div>
+
+  </div>
+  <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
+
+
+
+  
+  
+  <div class="inlineDisplay">
+    <div class="mainLabel">
+      <div class="mainTitle"><p style="text-align: center; font-size: 40px; color:cornflowerblue">Help Center</p></div>
+      <div class="searchBar">
+          <div style="text-align: center; top: 40%; position: relative;" >
+              <button pButton type="button" label="Search"></button>
+              <input type="text" pInputText placeholder="Keyword">         
+          </div>
+      </div>
+    </div>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Safety</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Privacy</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Report</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Downloads</p></div>
+    </a>
+
+    <br><br><br><br>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Lets talk</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Contact Us</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Breakdown</p></div>
+    </a>
+
+    <a href="http://example.com">
+    <div class="optionBoxes"><p style="top:15%; font-size: 20px; position: relative;">Privacy</p></div>
+    </a>
+
+
+  </div>

@@ -18,12 +18,17 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CardModule} from 'primeng/card';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
+import {CheckboxModule} from 'primeng/checkbox';
+import { HelpCenterComponent } from './help-center/help-center.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    PreLandingPageComponent,
+    HelpCenterComponent
   ],
 
   imports: [
@@ -42,7 +47,8 @@ import {DropdownModule} from 'primeng/dropdown';
     InputTextareaModule,
     CardModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    CheckboxModule
   ],
 
   providers: [MessageService],

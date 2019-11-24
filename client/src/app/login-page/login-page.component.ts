@@ -101,9 +101,10 @@ export class LoginPageComponent implements OnInit {
 
       this.authService.isValidated = true;
       if (isFirstTime) {
-        // will include the pre landing page to ask users what their interests are
+      this.navToPreLanding(userAuthPacket.uid);
+      } else {
+        this.navToLanding(userAuthPacket.uid);
       }
-      this.navToLanding(userAuthPacket.uid);
     },
 
     err => {
@@ -143,6 +144,9 @@ export class LoginPageComponent implements OnInit {
 
   navToLanding(userId: string) {
     this.router.navigate(['/landing', userId]);
+  }
+  navToPreLanding(userId: string) {
+    this.router.navigate(['/preLanding', userId]);
   }
 
 
