@@ -15,11 +15,9 @@ export class LoginPageComponent implements OnInit {
 
   loginForm: FormGroup;
   forgotPasswordForm: FormGroup;
-  signUpForm: FormGroup;
 
   isLoginSection: boolean;
   isResetPassword: boolean;
-  isSignUpSection: boolean;
   isPassordEmailSent: boolean;
   isJustRegistered: boolean;
 
@@ -32,14 +30,6 @@ export class LoginPageComponent implements OnInit {
 
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
-    });
-
-    this.signUpForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(1)]],
-      lastName: ['', [Validators.required, Validators.minLength(1)]],
-      email: ['', [Validators.required, Validators.minLength(5)]],
-      password: ['',  [Validators.required, Validators.minLength(5)]],
-      confirmPass: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -75,64 +65,27 @@ export class LoginPageComponent implements OnInit {
       this.callAuth(this.userAuth, false);
     }
 
-  verifySignUp() {
-    if (this.signUpForm.get('password').value !== this.signUpForm.get('confirmPass').value) {
-      this.signUpForm.reset();
-
-      return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Passwords do not match please try again'});
-    }
-
-    this.userAuth = {
-      email: this.signUpForm.get('email').value,
-      password: this.signUpForm.get('password').value,
-      firstName: this.signUpForm.get('firstName').value,
-      lastName: this.signUpForm.get('lastName').value,
-    };
-
-    this.callAuth(this.userAuth, true);
-  }
-
   callAuth(userAuth: Auth, isFirstTime: boolean) {
 
     this.authService.validateUser(this.userAuth, isFirstTime).subscribe(userAuthPacket => {
-
       this.authService.isValidated = true;
-      if (isFirstTime) {
-      this.navToPreLanding(userAuthPacket.uid);
-      } else {
-        this.navToLanding(userAuthPacket.uid);
-      }
+      this.navToLanding(userAuthPacket.uid);
     },
-
     err => {
       console.log(err);
-      this.signUpForm.reset(),
       this.loginForm.reset(),
-
       this.authService.isValidated = false;
-
-      if (isFirstTime === true) {
-        return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'That email is in use'});
-      }
-      return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'});
+      return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Incorrect email or password. Please try again.'});
   });
   }
 
   forgotPassword() {
     this.isLoginSection = false;
-    this.isSignUpSection = false;
     this.isResetPassword = true;
-  }
-
-  signUp() {
-    this.isLoginSection = false;
-    this.isResetPassword = false;
-    this.isSignUpSection = true;
   }
 
   resetFields() {
     this.isResetPassword = false;
-    this.isSignUpSection = false;
     this.isLoginSection = true;
     this.isPassordEmailSent = false;
 
@@ -141,9 +94,6 @@ export class LoginPageComponent implements OnInit {
 
   navToLanding(userId: string) {
     this.router.navigate(['/landing', userId]);
-  }
-  navToPreLanding(userId: string) {
-    this.router.navigate(['/preLanding', userId]);
   }
 
 
