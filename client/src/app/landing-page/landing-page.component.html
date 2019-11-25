@@ -16,7 +16,7 @@
 
     
 <div class="sidePanel">
-        <button style=" margin: auto; top: 30px; width: 70%" pButton type="button" (click)="showDialog()" label="Add Group" class="ui-button-rounded"></button>
+        <button style=" margin: auto; top: 30px; width: 70%" pButton type="button" (click)="showDialog();" label="Add Group" class="ui-button-rounded"></button>
 
         <div *ngFor="let groups of user.groups; let i = index" > 
 
@@ -35,12 +35,19 @@
                 </div>
 </div>
 
-<p-dialog header="Title" [(visible)]="display" [style]="{width: '300px', height: '400px'}" >
-    Please insert the name of the group<br>
-    <div [formGroup]="addGroupForm">
-        <input style="width:90%;" formControlName="name" type="text"  placeholder="Name" required pInputText /> 
+<p-dialog header="Title" [(visible)]="display" [draggable]="false" [modal]="true" [style]="{width: '300px', height: '280px'}" >
+    Please insert the name of the group
         <br>
-        
+        <div [formGroup]="addGroupForm">
+        <input style="width:95%;" formControlName="name" type="text"  placeholder="Name" required pInputText /> 
+        <br>
+        <br>
+        <br>
+        <div style="text-align: center">Please insert the News Interest for this group</div>
+        <input style="width:95%;" formControlName="newsInterest" type="text"  placeholder="News Interest" required pInputText /> 
+        <br>
+        <button style="width: 70%; margin-left: 15%; margin-top: 10%" pButton type="button" label="Submit"  class="ui-button-rounded"></button>
+
     </div>
 
 </p-dialog>
@@ -74,32 +81,48 @@
 
     <div class="mainBody">
         <div *ngFor="let posts of user.posts; let i = index" > 
+            <div class="postFeedWrapper">
+            <p-card  [style]="{width: '64%', height:'200px', marginLeft:'12.8%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                <p-header>
+                    <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                    <div class="nameAndTime">{{user.firstName}}<br></div>
+                    <div class="ellipse"><i class="pi pi-ellipsis-h" style="font-size: 3em"></i>
+                    </div>
+                    <div class="postBody"> {{posts.description}}</div>
+                    <div class="like">  
+                            
+                        <i class="pi pi-thumbs-up" style="font-size: 2.2em; color: #282828"></i>
+                        <p style="margin-left:10px; margin-top:2px; font-size: 20px">1</p>
 
-            <p-card *ngIf="isFeed && i%2==0" header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
-                <p-header>
-                    photo of user who posted or avatar
-    
+                    </div>
+                   
+                 
+
                 </p-header>
-             <div> {{posts.description}} </div>
-                <p-footer>
-                    <i class="pi pi-thumbs-up"></i>
-    
-                    <i class="pi pi-thumbs-down"></i>
-                </p-footer>
             </p-card>
-    
-            <p-card *ngIf="isFeed && i%2!==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'60%', marginTop:'5%'}" styleClass="ui-card-shadow">
-                <p-header>
-                    photo of user who posted or avatar
-    
-                </p-header>
-             <div> {{posts}} </div>
-                <p-footer>
-                    <i class="pi pi-thumbs-up"></i>
-    
-                    <i class="pi pi-thumbs-down"></i>
-                </p-footer>
-            </p-card>
+        
+       <div class="commentWrapper">
+
+            <div *ngFor="let comments of posts.comments; let i = index">
+
+                    <p-card  [style]="{width: '64.5%', height:'150px', marginLeft:'13.5%', backgroundColor:'#F0F0F0'}" >
+                            <p-header>
+                          {{comments.description}}
+                            </p-header>
+                        </p-card>
+
+            </div>
+        </div>
+
+            <div [formGroup]="postForm">
+                    <div class="textBox"><textarea  autoResize="true" class="addComment" formControlName="comment"  placeholder="Comment" pInputTextarea></textarea>
+                    </div>
+                    </div>
+                    <div class="comment"> <button style="width: 100%; height: 100%" pButton type="button" label="comment" class="ui-button-rounded"></button>
+                    </div>
+        </div>
+
+          
             
         </div>    
     </div>
@@ -141,34 +164,43 @@
         <div class="mainBody">
             <div *ngFor="let posts of groupPassed.posts; let i = index" > 
     
-                <p-card *ngIf="isFeed && i%2==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'10%', marginTop:'5%'}" styleClass="ui-card-shadow">
-                    <p-header>
-                        photo of user who posted or avatar
-        
-                    </p-header>
-                 <div> {{posts.description}} </div>
-                    <p-footer>
-                        <i class="pi pi-thumbs-up"></i>
-        
-                        <i class="pi pi-thumbs-down"></i>
-                    </p-footer>
-                </p-card>
-        
-                <p-card *ngIf="isFeed && i%2!==0"  header="Post" subheader="Timestamp" [style]="{width: '30%', height:'200px', marginLeft:'60%', marginTop:'5%'}" styleClass="ui-card-shadow">
-                    <p-header>
-                        photo of user who posted or avatar
-        
-                    </p-header>
-                 <div> {{posts.description}} </div>
-                    <p-footer>
-                        <i class="pi pi-thumbs-up"></i>
-        
-                        <i class="pi pi-thumbs-down"></i>
-                        
-                    </p-footer>
-                </p-card>
-                
+                    <p-card [style]="{width: '63%', height:'200px', marginLeft:'13.5%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                            <p-header>
+                                <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                                <div class="nameAndTime">{{user.firstName}}<br></div>
+                                <div class="ellipse"><i class="pi pi-ellipsis-h" style="font-size: 3em"></i>
+                                </div>
+                                <div class="postBody"> {{posts.description}}</div>
+                                <div class="like">  
+                                        
+                                    <i class="pi pi-thumbs-up" style="font-size: 2.2em; color: #282828"></i>
+                                    <p style="margin-left:10px; margin-top:2px; font-size: 20px">1</p>
+            
+                                </div>
+                            
+                            </p-header>
+                         
+                       
+                        </p-card>
+                        <div class="commentWrapper">
+
+                        <div *ngFor="let comments of posts.comments; let i = index">
+
+                                <p-card  [style]="{width: '64.5%', height:'150px', marginLeft:'13.5%', backgroundColor:'#F0F0F0'}" >
+                                        <p-header>
+                                      {{comments.description}}
+                                        </p-header>
+                                    </p-card>
+            
+                        </div>
+                    </div>
+
+                        <div [formGroup]="postForm">
+                                <div class="textBox"><textarea  autoResize="true" class="addComment" formControlName="comment"  placeholder="Comment" pInputTextarea></textarea>
+                                </div>
+                                </div>
+                                <div class="comment"> <button style="width: 100%; height: 100%" pButton type="button" label="comment" class="ui-button-rounded"></button>
+                                </div>
             </div>    
         </div>
 </div>
-<!--The code below will be used but because of redesign im pulling pieces as needed-->

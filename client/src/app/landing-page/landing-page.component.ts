@@ -37,6 +37,7 @@ export class LandingPageComponent implements OnInit {
 
                 this.postForm = this.fb.group({
                   post: ['', ],
+                  comment: ['',]
                                });
 
                // mock data
@@ -75,15 +76,17 @@ export class LandingPageComponent implements OnInit {
                 this.groups.push(this.secondGroup);
                 this.firstComment = {
                  id: '1',
-                 description: 'so cool'
+                 description: 'so littt'
                };
                 this.comments.push(this.firstComment);
+                this.comments.push(this.secondComment);
                 this.firstPost = {
                   id: '1',
                   description: 'yo I just ate some bomb food',
                   comments: this.comments,
                 };
                 this.posts.push(this.firstPost);
+                this.posts.push(this.secondPost);
                 this.user = {
                     id: '1',
                     username: 'diontrepate',
@@ -227,6 +230,10 @@ export class LandingPageComponent implements OnInit {
   leaveGroup() {
     // Call database
     console.log(this.groupPassed.name);
+  }
+
+  addGroup() {
+    
   }
 
   showDialog() {
