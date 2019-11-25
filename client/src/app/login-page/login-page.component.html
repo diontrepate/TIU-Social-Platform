@@ -1,65 +1,80 @@
-<div class = "mainBanner">
-<div class = "login">
-<button pButton type="button" label="Login" class="ui-button-rounded" (click)="resetFields()"></button>
+<div class="mainBanner">
 
-</div>
-<hr noshade>
+    <h4 class="logoText">AGORA</h4>
+    
 </div>
 
 <div class = "loginInteract">
 
-<form *ngIf="isLoginSection" [formGroup]="loginForm">
-
-    <br>
-    <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" required pInputText /> 
-    <br>
-    <input style="width:90%;" formControlName="password" type="text" placeholder="Password" required pInputText/>
-    <br>
-    <a style="padding-left: 5%;" (click)="forgotPassword()">Forgot Password?</a>
-    <br>
-    <button style="margin: auto; margin-top: 10px; display: block; width: 90%" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="verifyLogin()" class="ui-button-rounded"></button>
-    <br>
-    <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Sign Up" (click)="signUp()" class="ui-button-rounded"></button>
-
-</form>
-
-<form *ngIf="isResetPassword" [formGroup]="forgotPasswordForm">
-    <h1 style="text-align: center; display:block;">Password reset</h1>
-    <p style="text-align: center; display:block;">
-        Forgot your password? We have you covered! Enter your
-        email and we’ll send you an email with a link to reset it.</p>
-    <br>
-    <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" pInputText /> 
-    <br>
-    <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Reset Password" class="ui-button-rounded" (click)="forgotPasswordEmail()"></button>
-</form>
-
-<form *ngIf="isPassordEmailSent">
-    <h1 style="text-align: center; display:block;">Email Sent!</h1>
-    <p style="text-align: center; display:block;">
-        We have sent you an email to reset your password</p>
-    <br>
-    <p style="text-align: center; display:block;">
-       <a (click)="this.resetFields()">Back to login</a></p>
-</form>
-
-<form *ngIf="isSignUpSection" [formGroup]="signUpForm">
+    <form *ngIf="isLoginSection" [formGroup]="loginForm">
+        <br>
+        <h2 class="formTitle">Login</h2>
+        <br>
+        <input formControlName="email" type="text"  placeholder="Email" required pInputText /> 
+        <br>
+        <input formControlName="password" type="text" placeholder="Password" required pInputText/>
+        <br>
+        <a class="formLink" (click)="forgotPassword()">Forgot password?</a>
+        <br>
+        <button style="margin-top: 15px" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="verifyLogin()" class="outlineButton ui-button-rounded"></button>
+        <br>
+        <button pButton type="button" label="Sign up" (click)="signUp()" class="fullButton ui-button-rounded"></button>
+        <br>
+        <br>
+    </form>
     
-        <h1 style="text-align: center; display:block;">Create an Account</h1>
+    <form *ngIf="isResetPassword" [formGroup]="forgotPasswordForm">
         <br>
-        <input style="width:90%;" formControlName="firstName" type="text"  placeholder="First Name" pInputText /> 
+        <h2 class="formTitle">Password reset</h2>
         <br>
-        <input style="width:90%;" formControlName="lastName" type="text"  placeholder="Last Name" pInputText /> 
+        <p class="formText">
+            Forgot your password? We have you covered! Enter your
+            email and we’ll send you a link to reset it.
+        </p>
         <br>
-        <input style="width:90%;" formControlName="email" type="text"  placeholder="Email" pInputText /> 
+        <input formControlName="email" type="text"  placeholder="Email" pInputText /> 
         <br>
-        <input style="width:90%;" formControlName="password" type="text" placeholder="Password" pInputText />
+        <button style="margin-top: 15px" pButton type="button" label="Reset password" class="fullButton ui-button-rounded" (click)="forgotPasswordEmail()"></button>
         <br>
-        <input style="width:90%;" formControlName="confirmPass" type="text" placeholder="Confirm Password" pInputText />
+        <a style="float: none; margin-left: 5%" class="formLink" (click)="this.resetFields()">Back to login</a>
         <br>
-        <button style="margin: auto; display: block; width: 90%" pButton type="button" label="Sign Up" (click)="verifySignUp()" class="ui-button-rounded"></button>
+        <br>
+    </form>
 
-</form>
+    <form *ngIf="isPassordEmailSent">
+        <br>
+        <h2 class="formTitle">Email sent!</h2>
+        <br>
+        <p class="formText">
+            Check your inbox for a link to reset your password.
+        </p>
+        <br>
+        <div style="text-align: center">
+            <a class="formLinkAlt" (click)="this.resetFields()">Back to login</a>
+        </div>
+        <br>
+        <br>
+    </form>
 
+    <form *ngIf="isSignUpSection" [formGroup]="signUpForm">
+        <br>
+        <h2 class="formTitle">Create an account</h2>
+        <br>
+        <input formControlName="firstName" type="text"  placeholder="First name" pInputText /> 
+        <br>
+        <input formControlName="lastName" type="text"  placeholder="Last name" pInputText /> 
+        <br>
+        <input formControlName="email" type="text"  placeholder="Email" pInputText /> 
+        <br>
+        <input formControlName="password" type="text" placeholder="Password" pInputText />
+        <br>
+        <input formControlName="confirmPass" type="text" placeholder="Confirm password" pInputText />
+        <br>
+        <button pButton type="button" label="Sign up" (click)="verifySignUp()" class="fullButton ui-button-rounded"></button>
+        <br>
+        <a style="float: none; margin-left: 5%" class="formLink" (click)="this.resetFields()">Already have an account?</a>
+        <br>
+        <br>
+    </form>
 
 </div>

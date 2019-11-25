@@ -1,34 +1,113 @@
+$primary-color: #E14C4C;
+$primary-color-hover: #D23838;
+$accent-color: #282828;
+$border-color: #A9A9A9;
+$main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
 .mainBanner {
     width: 100%;
-    height: 100px;
+    height: 65px;
     position: absolute;
-}
-
-hr {
-    width: 100%;
-    border-color: black;
-    margin-top: 100px;
-}
-
-
-.login {
-    position: absolute;
-    margin-top: 30px;
-    right: 80px;
+    border-bottom: 1px solid $border-color;
+    overflow: hidden; 
 }
 
 .loginInteract {
     position: relative;
-    width: 50%;
-    height: 450px;
-    border: 1px solid black;
+    max-width: 500px;
+    border: 1px solid $border-color;
     border-radius: 5px;
     top: 120px;
     margin: auto;
 }
 
-input {
+.loginInteract input {
     margin: auto;
     display: block;
+    width: 90% !important;
+    height: 40px !important;
+}
 
+.formTitle {
+    text-align: center;
+    font-family: $main-font;
+    color: $accent-color;
+}
+
+.formText {
+    text-align: center;
+    font-family: $main-font;
+    font-weight: lighter;
+    display: block;
+    margin: 0 10px 0 10px;
+}
+
+.logoText {
+    font-family: $main-font;
+    color: $accent-color;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.formLink {
+    color: $accent-color;
+    font-family: $main-font;
+    font-weight: lighter;
+    float: right; 
+    padding-right: 25px;
+}
+
+.formLink:hover {
+    color: $accent-color;
+    font-family: $main-font;
+    font-weight: lighter;
+    float: right; 
+    padding-right: 25px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.formLinkAlt {
+    color: $primary-color;
+    font-family: $main-font !important;
+    font-weight: lighter !important;
+    text-align: center !important;
+    padding-right: 25px !important;
+}
+
+.formLinkAlt:hover {
+    color: $primary-color-hover;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.outlineButton {
+    margin: auto; 
+    display: block; 
+    width: 90%;
+    border-radius: 20px !important;
+    height: 40px;
+    background: white !important;
+    color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+.outlineButton:hover {
+    color: $primary-color-hover !important;
+    border-color: $primary-color-hover !important;
+}
+
+.fullButton {
+    margin: auto; 
+    display: block; 
+    width: 90%;
+    border-radius: 20px !important;
+    height: 40px;
+    background: $primary-color !important;
+    border-style: none !important;
+}
+
+.fullButton:hover {
+    background: $primary-color-hover !important;
+    border-style: none !important;
 }

@@ -54,13 +54,10 @@ export class LoginPageComponent implements OnInit {
     this.userAuth = {
       email: this.forgotPasswordForm.get('email').value,
     };
-    this.isPassordEmailSent = true;
-
     this.authService.sendPasswordResetEmail(this.userAuth).subscribe( emailSent => {
-    this.forgotPasswordForm.reset();
-    this.isPassordEmailSent = true;
-    return this.messageService.add({key: 'login', severity: 'success', summary: 'Email Sent', detail: 'Email confirmation email has been sent'});
-
+      this.forgotPasswordForm.reset();
+      this.isResetPassword = false;
+      this.isPassordEmailSent = true;
     },
     err => {
       this.forgotPasswordForm.reset();
