@@ -21,6 +21,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import { HelpCenterComponent } from './help-center/help-center.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { HelpCenterComponent } from './help-center/help-center.component';
     LoginPageComponent,
     LandingPageComponent,
     PreLandingPageComponent,
-    HelpCenterComponent
+    HelpCenterComponent,
+    HomePageComponent,
+    SignUpPageComponent
   ],
 
   imports: [
