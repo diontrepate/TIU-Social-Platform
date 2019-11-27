@@ -1,0 +1,24 @@
+{
+  "name": "tiu-social-platform",
+  "version": "1.0.0",
+  "description": "## Overview This Angular web application is designed as a platform for TIU students to share resources and collaborate.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diontrepate/TIU-Social-Platform.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diontrepate/TIU-Social-Platform/issues"
+  },
+  "homepage": "https://github.com/diontrepate/TIU-Social-Platform#readme"
+}
