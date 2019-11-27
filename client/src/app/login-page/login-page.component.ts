@@ -50,24 +50,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   forgotPasswordEmail() {
-
     this.userAuth = {
       email: this.forgotPasswordForm.get('email').value,
     };
-    this.isPassordEmailSent = true;
 
     this.authService.sendPasswordResetEmail(this.userAuth).subscribe( emailSent => {
-    this.forgotPasswordForm.reset();
-    this.isPassordEmailSent = true;
-    return this.messageService.add({key: 'login', severity: 'success', summary: 'Email Sent', detail: 'Email confirmation email has been sent'});
-
-    },
-    err => {
+      this.forgotPasswordForm.reset();
+      this.isResetPassword = false;
+      this.isPassordEmailSent = true;
+      return this.messageService.add({key: 'login', severity: 'success', summary: 'Email Sent', detail: 'Email confirmation email has been sent'});
+    }, err => {
       this.forgotPasswordForm.reset();
       return this.messageService.add({key: 'login', severity: 'error', summary: 'Error', detail: 'An internal error has occurred'});
-  }
-    );
-
+    });
   }
 
   verifyLogin() {
@@ -140,7 +135,6 @@ export class LoginPageComponent implements OnInit {
     this.isPassordEmailSent = false;
 
   }
-
 
   navToLanding(userId: string) {
     this.router.navigate(['/landing', userId]);

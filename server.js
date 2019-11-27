@@ -15,7 +15,7 @@ app.get('/*',(req,res)=> res.sendFile(path.join(__dirname)));
 
 const server = http.createServer(app);
 
-server.listen(port, ()=> console.log('Running...'));
+server.listen(port, ()=> console.log('Running on port ', port));
   
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
