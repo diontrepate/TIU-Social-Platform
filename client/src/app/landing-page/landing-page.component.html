@@ -2,25 +2,34 @@
 <div class="topBar">
 
     <div class="imageContainer">
-
-
-        <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">
-        
+        <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">         
     </div>
+
     <div class="nameLabel">{{user.firstName}}</div>
 
-    </div>
+</div>
 
     <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
    
-
-    
 <div class="sidePanel">
-        <button style=" margin: auto; top: 30px; width: 70%" pButton type="button" (click)="showDialog();" label="Add Group" class="ui-button-rounded"></button>
+    <button style=" margin: 10px 5px auto; top: 10px; width: 95%" pButton type="button" (click)="showDialog();" label="Add Group" class="ui-button-rounded"></button>
+        <div *ngFor="let groups of user.groups; let i = index"> 
+            <br>
+        <div *ngIf="!mobile">
+            <p-card header=""  [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
+                <p-header style="margin: 40%">
+                    {{user.groups[i].name}}
+                </p-header>
 
-        <div *ngFor="let groups of user.groups; let i = index" > 
+        <div style="margin: 10%"> {{user.groups[i].name}} </div>
 
-                <p-card header="" [style]="{width: '70%', height:'120px', marginTop:'20%'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
+                    <p-footer></p-footer>
+             </p-card>
+        </div>
+
+            <div *ngIf="mobile">
+                
+                <p-card header=""  [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
                     <p-header style="margin: 40%">
                             {{user.groups[i].name}}
         
@@ -32,10 +41,13 @@
                 
                     </p-footer>
                 </p-card>
+            </div>
+
+                <br>
                 </div>
 </div>
 
-<p-dialog header="Title" [(visible)]="display" [draggable]="false" [modal]="true" [style]="{width: '300px', height: '280px'}" >
+<p-dialog header="Title" [(visible)]="display" [draggable]="false" [modal]="true" [style]="{width: '50%', height: '280px'}" >
     Please insert the name of the group
         <br>
         <div [formGroup]="addGroupForm">
@@ -58,7 +70,7 @@
 
         <div [formGroup]="postForm" class="addPostContainer">
             <textarea class="addPost" formControlName="post"  placeholder="Type your thoughts here..." pInputTextarea></textarea>
-            <button style="margin-left:89% ; width: 10%; bottom: 38%;" pButton type="button" label="Post" (click)="this.submitPost()" class="ui-button-rounded"></button>
+            <button  pButton type="button" label="Post" (click)="this.submitPost()" class="ui-button-rounded"></button>
         </div>
 <div class="carousel">
         <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
@@ -104,12 +116,22 @@
        <div class="commentWrapper">
 
             <div *ngFor="let comments of posts.comments; let i = index">
-
-                    <p-card  [style]="{width: '64.5%', height:'150px', marginLeft:'13.5%', backgroundColor:'#F0F0F0'}" >
+                <div *ngIf="!mobile">
+                    <p-card  [style]="{width: '65%', height:'150px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
                             <p-header>
                           {{comments.description}}
                             </p-header>
                         </p-card>
+                </div>
+
+                <div *ngIf="mobile">
+                    <p-card  [style]="{width: '65%', height:'80px', marginLeft:'12.9%', backgroundColor:'#F0F0F0', 'boxShadow':'none'}" >
+                            <p-header>
+                          {{comments.description}}
+                            </p-header>
+                        </p-card>
+                </div>
+
 
             </div>
         </div>
@@ -134,14 +156,14 @@
 <div *ngIf="isGroup">
 
         <div class="navToLanding">
-                <button style=" margin-left:10px; bottom: 10px; width: 90%" pButton type="button" label="Home" (click)="this.isGroup = false; this.isHome = true" class="ui-button-rounded"></button>
-                <button style=" margin-left:10px; bottom: 5px; width: 90%" pButton type="button" label="Leave" (click)="this.leaveGroup()" class="ui-button-rounded ui-button-danger"></button>
+                <button  pButton type="button" label="Home" (click)="this.isGroup = false; this.isHome = true" class="ui-button-rounded"></button>
+                <button  pButton type="button" label="Leave" (click)="this.leaveGroup()" class="ui-button-rounded ui-button-danger"></button>
 
             </div>
 
         <div class="addPostContainer" [formGroup]="postForm">
             <textarea class="addPost" formControlName="post" placeholder="Type your thoughts here..." pInputTextarea></textarea>
-            <button style="margin-left:89% ; width: 10%; bottom: 38%;" pButton type="button" label="Post" (click)="this.submitPost()" class="ui-button-rounded"></button>
+            <button pButton type="button" label="Post" (click)="this.submitPost()" class="ui-button-rounded"></button>
         </div>
     <div class="carousel">
             <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="groupItems">
@@ -162,9 +184,10 @@
         </div>
 
         <div class="mainBody">
-            <div *ngFor="let posts of groupPassed.posts; let i = index" > 
+
+            <div *ngFor="let posts of groupPassed.posts; let i = index"> 
     
-                    <p-card [style]="{width: '63%', height:'200px', marginLeft:'13.5%', marginTop:'5%'}" styleClass="ui-card-shadow">
+                    <p-card [style]="{width: '64%', height:'200px', marginLeft:'12.8%', marginTop:'5%'}" styleClass="ui-card-shadow">
                             <p-header>
                                 <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
                                 <div class="nameAndTime">{{user.firstName}}<br></div>
@@ -186,7 +209,16 @@
 
                         <div *ngFor="let comments of posts.comments; let i = index">
 
-                                <p-card  [style]="{width: '64.5%', height:'150px', marginLeft:'13.5%', backgroundColor:'#F0F0F0'}" >
+                            <div *ngIf="!mobile">
+                                <p-card  [style]="{width: '65%', height:'150px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
+                                        <p-header>
+                                      {{comments.description}}
+                                        </p-header>
+                                    </p-card>
+                            </div>
+            
+                            <div *ngIf="mobile">
+                                <p-card  [style]="{width: '65%', height:'80px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
                                         <p-header>
                                       {{comments.description}}
                                         </p-header>
@@ -194,13 +226,15 @@
             
                         </div>
                     </div>
+                </div>    
 
                         <div [formGroup]="postForm">
+
                                 <div class="textBox"><textarea  autoResize="true" class="addComment" formControlName="comment"  placeholder="Comment" pInputTextarea></textarea>
                                 </div>
                                 </div>
                                 <div class="comment"> <button style="width: 100%; height: 100%" pButton type="button" label="comment" class="ui-button-rounded"></button>
                                 </div>
-            </div>    
-        </div>
+                                
+                        </div>
 </div>

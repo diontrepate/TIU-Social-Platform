@@ -154,8 +154,12 @@ export class LandingPageComponent implements OnInit {
   isFeed = true;
   display = false;
   groupPassed: Group;
-
+  mobile: boolean;
   ngOnInit() {
+    
+    if (window.innerWidth > 300 && window.innerWidth < 800) { // 768px portrait
+      this.mobile = true;
+    }
 
     this.userApiService.getNews(this.user.newsTopic, 'popular').subscribe(news => {
 
@@ -239,5 +243,5 @@ export class LandingPageComponent implements OnInit {
   showDialog() {
     this.display = true;
 }
-
+   
 }
