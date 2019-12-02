@@ -1,0 +1,34 @@
+<div class="mainBanner">
+    <div class="bannerLogoContainer">
+        <h4 class="logoText">
+            <a href="/">AGORA</a>
+        </h4>
+    </div>
+    <div class="bannerButtonContainer">
+        <button pButton type="button" label="Login" [routerLink]="['/login']" class="bannerButton ui-button-rounded"></button>
+        <button pButton type="button" label="Sign up" [routerLink]="['/signUp']" class="bannerButtonFull ui-button-rounded"></button>
+    </div>
+</div>
+
+<div class = "loginInteract"> 
+    <form [formGroup]="signUpForm">
+        <br>
+        <h2 class="formTitle">Create an account</h2>
+        <br>
+        <input formControlName="firstName" type="text"  placeholder="First name" pInputText /> 
+        <br>
+        <input formControlName="lastName" type="text"  placeholder="Last name" pInputText /> 
+        <br>
+        <input formControlName="email" type="text"  placeholder="Email" pInputText /> 
+        <br>
+        <input formControlName="password" type="text" placeholder="Password" pInputText />
+        <br>
+        <input formControlName="confirmPass" type="text" placeholder="Confirm password" pInputText />
+        <br>
+        <button pButton type="button" label="Sign up" (click)="verifySignUp()" class="fullButton ui-button-rounded"></button>
+        <br>
+        <a style="float: none; margin-left: 5%" class="formLink" onclick="location.href = '/login'">Already have an account?</a>
+        <br>
+        <br>
+    </form>
+</div>

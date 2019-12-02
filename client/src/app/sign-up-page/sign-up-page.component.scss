@@ -57,6 +57,12 @@ $main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
     background: $primary-color-hover !important;
 }
 
+.logoText a {
+    font-family: $main-font;
+    color: $accent-color;
+    font-weight: 600;
+    margin-left: 20px;
+}
 
 .loginInteract {
     position: relative;
@@ -80,21 +86,6 @@ $main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
     color: $accent-color;
 }
 
-.formText {
-    text-align: center;
-    font-family: $main-font;
-    font-weight: lighter;
-    display: block;
-    margin: 0 10px 0 10px;
-}
-
-.logoText a {
-    font-family: $main-font;
-    color: $accent-color;
-    font-weight: 600;
-    margin-left: 20px;
-}
-
 .formLink {
     color: $accent-color;
     font-family: $main-font;
@@ -111,36 +102,6 @@ $main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
     padding-right: 25px;
     text-decoration: underline;
     cursor: pointer;
-}
-
-.formLinkAlt {
-    color: $primary-color;
-    font-family: $main-font !important;
-    font-weight: lighter !important;
-    text-align: center !important;
-    padding-right: 25px !important;
-}
-
-.formLinkAlt:hover {
-    color: $primary-color-hover;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.outlineButton {
-    margin: auto; 
-    display: block; 
-    width: 90%;
-    border-radius: 20px !important;
-    height: 40px;
-    background: white !important;
-    color: $primary-color !important;
-    border-color: $primary-color !important;
-}
-
-.outlineButton:hover {
-    color: $primary-color-hover !important;
-    border-color: $primary-color-hover !important;
 }
 
 .fullButton {
