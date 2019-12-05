@@ -139,10 +139,10 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.userAuth = {
-      email: this.loginForm.get('email').value,
-      password: this.loginForm.get('password').value,
-      firstName: this.loginForm.get('firstName').value,
-      lastName: this.loginForm.get('lastName').value,
+      email: this.signUpForm.get('email').value,
+      password: this.signUpForm.get('password').value,
+      firstName: this.signUpForm.get('firstName').value,
+      lastName: this.signUpForm.get('lastName').value,
     };
 
     this.callAuth(this.userAuth, true);
