@@ -8,6 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
 
+
 const routes: Routes = [
   { path: 'preLanding/:id', component: PreLandingPageComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginPageComponent },

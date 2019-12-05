@@ -12,16 +12,15 @@ import { Router } from '@angular/router';
 })
 
 export class LoginPageComponent implements OnInit {
-
+  signUpForm: FormGroup;
   loginForm: FormGroup;
   forgotPasswordForm: FormGroup;
-  signUpForm: FormGroup;
 
   isLoginSection: boolean;
   isResetPassword: boolean;
-  isSignUpSection: boolean;
   isPassordEmailSent: boolean;
   isJustRegistered: boolean;
+  isSignUpSection: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private messageService: MessageService) {
 
@@ -78,23 +77,6 @@ export class LoginPageComponent implements OnInit {
       this.callAuth(this.userAuth, false);
     }
 
-  verifySignUp() {
-    if (this.signUpForm.get('password').value !== this.signUpForm.get('confirmPass').value) {
-      this.signUpForm.reset();
-
-      return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Passwords do not match please try again'});
-    }
-
-    this.userAuth = {
-      email: this.signUpForm.get('email').value,
-      password: this.signUpForm.get('password').value,
-      firstName: this.signUpForm.get('firstName').value,
-      lastName: this.signUpForm.get('lastName').value,
-    };
-
-    this.callAuth(this.userAuth, true);
-  }
-
   callAuth(userAuth: Auth, isFirstTime: boolean) {
 
     this.authService.validateUser(this.userAuth, isFirstTime).subscribe(userAuthPacket => {
@@ -105,7 +87,6 @@ export class LoginPageComponent implements OnInit {
         this.navToLanding(userAuthPacket.uid);
       }
     },
-
     err => {
       console.log(err);
       this.signUpForm.reset();
@@ -116,6 +97,7 @@ export class LoginPageComponent implements OnInit {
         return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'That email is in use'});
       }
       return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Wrong Password or Email please try again'});
+      
   });
   }
 
@@ -140,15 +122,31 @@ export class LoginPageComponent implements OnInit {
   }
 
 
+
   navToLanding(userId: string) {
     this.router.navigate(['/landing', userId]);
   }
+
   navToPreLanding(userId: string) {
     this.router.navigate(['/preLanding', userId]);
   }
 
+  verifySignUp() {
+    if (this.signUpForm.get('password').value !== this.signUpForm.get('confirmPass').value) {
+      this.signUpForm.reset();
 
+      return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'Passwords do not match please try again'});
+    }
 
+    this.userAuth = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
+      firstName: this.loginForm.get('firstName').value,
+      lastName: this.loginForm.get('lastName').value,
+    };
+
+    this.callAuth(this.userAuth, true);
+  }
 
 
 

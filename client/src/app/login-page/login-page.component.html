@@ -1,7 +1,13 @@
 <div class="mainBanner">
-
-    <h4 class="logoText">AGORA</h4>
-    
+    <div class="bannerLogoContainer">
+        <h4 class="logoText">
+            <a href="/">AGORA</a>
+        </h4>
+    </div>
+    <div class="bannerButtonContainer">
+        <button pButton type="button" label="Login" [routerLink]="['/login']" class="bannerButton ui-button-rounded"></button>
+        <button pButton type="button" label="Sign up" [routerLink]="['/signUp']" class="bannerButtonFull ui-button-rounded"></button>
+    </div>
 </div>
 
 <div class = "loginInteract">
@@ -18,7 +24,7 @@
         <br>
         <button style="margin-top: 15px" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="verifyLogin()" class="outlineButton ui-button-rounded"></button>
         <br>
-        <button pButton type="button" label="Sign up" (click)="signUp()" class="fullButton ui-button-rounded"></button>
+        <button pButton type="button" label="Sign up" onclick="location.href = '/signUp'" class="fullButton ui-button-rounded"></button>
         <br>
         <br>
     </form>

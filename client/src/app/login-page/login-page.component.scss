@@ -10,7 +10,53 @@ $main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
     position: absolute;
     border-bottom: 1px solid $border-color;
     overflow: hidden; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
+
+.bannerButtonContainer {
+    margin-right: 20px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.bannerButtonContainer button {
+    margin-top: 13px;
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex:  1 1 auto;
+    -webkit-flex:  1 1 auto;
+    -ms-flex:  1 1 auto;
+    flex:  1 1 auto;
+}
+
+.bannerButton {
+    width: 100px;
+    height: 30px !important;
+    color: $accent-color !important;
+    background: none !important;
+    border-style: none !important;
+}
+
+.bannerButton:hover {
+    text-decoration: underline !important;
+}
+
+.bannerButtonFull {
+    border-radius: 15px !important;
+    width: 150px;
+    height: 30px !important;
+    background: $primary-color !important;
+    border-style: none !important;
+}
+
+.bannerButtonFull:hover {
+    background: $primary-color-hover !important;
+}
+
 
 .loginInteract {
     position: relative;
@@ -42,7 +88,7 @@ $main-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Hel
     margin: 0 10px 0 10px;
 }
 
-.logoText {
+.logoText a {
     font-family: $main-font;
     color: $accent-color;
     font-weight: 600;
