@@ -161,7 +161,7 @@ img: string;
     this.commentItems =[{
       label: 'options',
       items:[{
-        label: 'Delete Post', icon: 'pi pi-trash', command: (event: any) => { this.confirmCommentDelete(event); }
+        label: 'Delete Comment', icon: 'pi pi-trash', command: (event: any) => { this.confirmCommentDelete(event); }
       }]
     }]
   }
