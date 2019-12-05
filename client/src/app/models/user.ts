@@ -2,7 +2,7 @@ import { Post } from './post';
 import { Group } from './Group';
 
 export interface User {
-    uid: string;
+    uid?: string;
     storageItem?: string;
     username?: string;
     email?: string;

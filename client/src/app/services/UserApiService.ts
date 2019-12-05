@@ -46,8 +46,8 @@ export class UserApiService extends ApiService {
     return null;
   }
 
-  uploadUserImage(image: User): Observable<User> {
-    return null;
+  uploadUserImage(image: User, userId: string): Observable<User> {
+    return this.http.put<User>('https://agora-storage-service.herokuapp.com/v1/users/'+ userId, image);
   }
 
   patchUserDetails(details: User): Observable<User> {

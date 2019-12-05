@@ -11,6 +11,7 @@ import { User } from '../models/user';
 import { MenuItem, Message } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import {ConfirmationService} from 'primeng/api';
+import { Url } from 'url';
 
 export interface Item {
   title: string;
@@ -26,15 +27,6 @@ export interface Item {
 })
 
 export class LandingPageComponent implements OnInit, OnDestroy {
-
-  polling: any;
-
-  newsSubscription: Subscription;
-  createPostSubscription: Subscription;
-  getAllPostSubscription: Subscription;
-  createGroupSubscription: Subscription;
-  getUserInfoSubscription: Subscription;
-  deleteGroupSubscription: Subscription;
 
   constructor(private confirmationService: ConfirmationService, private userApiService: UserApiService, private commonService: CommonAppService, private router: Router, private route: ActivatedRoute, private authService: AuthService,
               private fb: FormBuilder) {
@@ -77,13 +69,12 @@ export class LandingPageComponent implements OnInit, OnDestroy {
                 });
 
                 this.getUserInfoSubscription = this.userApiService.getUserInfoById(this.userId).subscribe(userInfo => {
-                  console.log(userInfo);
                   this.commonService.setUser(userInfo);
+                  
+                  
                   this.userInfo = userInfo;
 
-                  if (this.userInfo.newsInterests === undefined) {
-                    }
-
+                  
 
                   this.newsSubscription = this.userApiService.getNews('car', 'popular').subscribe(news => {
 
@@ -107,6 +98,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
 
                   }
+
+  polling: any;
+
+  newsSubscription: Subscription;
+  createPostSubscription: Subscription;
+  getAllPostSubscription: Subscription;
+  createGroupSubscription: Subscription;
+  getUserInfoSubscription: Subscription;
+  deleteGroupSubscription: Subscription;
   createGroup: Group;
   allGroups: Group[];
   createPost: Post;
@@ -118,6 +118,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   userId: string;
   postId: string;
   commentId: string;
+  newUrl: string;
   userInfo: User;
   userGroups: Group[];
   news: EverythingNews;
@@ -137,6 +138,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   groupPassed: Group;
   mobile: boolean;
   groupMap = new Map();
+
+img: string;
   private setupMenu(router: Router) {
     this.menuItems = [{
       label: this.userInfo.firstName,
@@ -349,6 +352,14 @@ confirmCommentDelete(event: any) {
     }
 }
 
+  getNewUrl() {
+    console.log("heyyy here" + this.userInfo.storageItem.toString());
+
+    this.img = atob(this.userInfo.storageItem);
+    console.log("heyyy" + this.img);
+
+    return this.img;
+  }
 
   ngOnDestroy(): void {
     this.getAllPostSubscription.unsubscribe();

@@ -38,11 +38,10 @@ export class UploadComponent implements OnInit, OnDestroy {
 
 
     this.userImage = {
-        uid: this.userId,
         storageItem: this.url
         };
 
-    this.subscription = this.userApiService.uploadUserImage(this.userImage).subscribe();
+    this.subscription = this.userApiService.uploadUserImage(this.userImage, this.userId).subscribe();
 
   }
 
