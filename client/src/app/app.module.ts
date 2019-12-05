@@ -9,7 +9,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'primeng/carousel';
 import {SidebarModule} from 'primeng/sidebar';
@@ -21,8 +21,11 @@ import {DropdownModule} from 'primeng/dropdown';
 import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import { HelpCenterComponent } from './help-center/help-center.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import { UploadComponent } from './upload/upload.component';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {PasswordModule} from 'primeng/password';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,7 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
     LandingPageComponent,
     PreLandingPageComponent,
     HelpCenterComponent,
-    HomePageComponent,
-    SignUpPageComponent
+    UploadComponent
   ],
 
   imports: [
@@ -52,10 +54,14 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
     CardModule,
     DialogModule,
     DropdownModule,
-    CheckboxModule
+    CheckboxModule,
+    FileUploadModule,
+    ConfirmDialogModule,
+    PasswordModule,
+    AutoCompleteModule
   ],
 
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

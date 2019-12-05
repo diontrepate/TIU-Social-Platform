@@ -5,8 +5,8 @@
         </h4>
     </div>
     <div class="bannerButtonContainer">
-        <button pButton type="button" label="Login" [routerLink]="['/login']" class="bannerButton ui-button-rounded"></button>
-        <button pButton type="button" label="Sign up" [routerLink]="['/signUp']" class="bannerButtonFull ui-button-rounded"></button>
+        <button pButton type="button" label="Login" (click)="this.resetFields()" class="bannerButton ui-button-rounded"></button>
+        <button pButton type="button" label="Sign up" (click)="signUp()" class="bannerButtonFull ui-button-rounded"></button>
     </div>
 </div>
 
@@ -18,13 +18,13 @@
         <br>
         <input formControlName="email" type="text"  placeholder="Email" required pInputText /> 
         <br>
-        <input formControlName="password" type="text" placeholder="Password" required pInputText/>
+        <input formControlName="password" type="password" placeholder="Password" required pInputText/>
         <br>
         <a class="formLink" (click)="forgotPassword()">Forgot password?</a>
         <br>
         <button style="margin-top: 15px" pButton type="button" [disabled]="loginForm.invalid" label="Login" (click)="verifyLogin()" class="outlineButton ui-button-rounded"></button>
         <br>
-        <button pButton type="button" label="Sign up" onclick="location.href = '/signUp'" class="fullButton ui-button-rounded"></button>
+        <button pButton type="button" label="Sign up" (click)="signUp()" class="fullButton ui-button-rounded"></button>
         <br>
         <br>
     </form>
@@ -58,6 +58,27 @@
         <div style="text-align: center">
             <a class="formLinkAlt" (click)="this.resetFields()">Back to login</a>
         </div>
+        <br>
+        <br>
+    </form>
+
+    <form *ngIf="isSignUpSection" [formGroup]="signUpForm">
+        <br>
+        <h2 class="formTitle">Create an account</h2>
+        <br>
+        <input formControlName="firstName" type="text"  placeholder="First name" pInputText /> 
+        <br>
+        <input formControlName="lastName" type="text"  placeholder="Last name" pInputText /> 
+        <br>
+        <input formControlName="email" type="text"  placeholder="Email" pInputText /> 
+        <br>
+        <input formControlName="password" type="password" pPassword placeholder="Password" pInputText />
+        <br>
+        <input formControlName="confirmPass" type="password" pPassword placeholder="Confirm password" pInputText />
+        <br>
+        <button pButton type="button" label="Sign up" (click)="verifySignUp()" class="fullButton ui-button-rounded"></button>
+        <br>
+        <a style="float: none; margin-left: 5%" class="formLink" (click)="this.resetFields()">Already have an account?</a>
         <br>
         <br>
     </form>

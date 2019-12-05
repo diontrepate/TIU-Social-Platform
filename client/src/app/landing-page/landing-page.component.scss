@@ -25,8 +25,8 @@ body {
 }
 .textBox{
     position: relative;
-    width: 63%;
-    margin-left:13.5%;
+    width: 64.2%;
+    margin-left:12.7%;
     overflow:hidden; 
 }
 .profilePic{
@@ -119,6 +119,7 @@ body {
     .nameLabel {
         bottom: 92%;
         left: 92%;
+        margin: auto;
         font-size: 25px;
         position: fixed;
     }
@@ -134,13 +135,19 @@ body {
     left: 3%;
     z-index: 4;
     position: fixed;
+
+    button{
+        margin-left:10px;
+         bottom: 10px;
+          width: 90%
+    } 
 }
 
 .sidePanel {
-    height: 100%;
-    width: 15%;
+    height: 90%;
+    width: 20%;
     top: 80px;
-    left: 3%;
+    left: 1%;
     position: fixed;
     overflow-y: scroll;
 }
@@ -155,12 +162,14 @@ body {
 }
 .carousel {
     height: 27%;
-    width: 50%;
-    left: 28%;
+    width: 51.5%;
+    left: 27.5%;
     top: 30%;
     margin-left: 20px;
     z-index: 1;
     position: absolute;
+
+   
 }
 
 // custom class applied to imagas to ensure that they appear the size we want
@@ -177,11 +186,18 @@ body {
     margin-left: 12px;
     position: fixed;
     z-index: 5;
+
+    button{
+        margin-left: 89% ; 
+        width: 10%; 
+        bottom: 38%;
+    }
 }
 
 .addPost {
     width: 100%;
     height: 100%;
+    margin: auto;
 }
 
 .addComment {
@@ -202,52 +218,125 @@ body {
 
 
 
-// the commented code below will be used at some point the redesign called for me to start fresh
 
 
 
-
-// .carousel {
-//     background-color: blue;
-//     width: 100%;
-//     height: 40%;
-//     top: 10px;
-//     margin-top: 40px;
-//     position: relative;
-// }
-
-// .addPost {
-//     width: 60%;
-//     height: 250px;
-//     top: 40px;
-//     border: solid red 2px;
-//     position: relative;
-//     margin-right: auto;
-//     margin-left: auto;
-// }
-
-// .feedContainer {
-//     border: solid red 2px;
-//     width: 100%;
+@media screen and (max-width: 900px) {
     
-//     height: 1000px;
-//     top: 50px;
-//     position: relative;
-//     margin-top: 20px;
-//     margin-bottom: 20px;
-//     overflow-y: scroll;
-// }
+    
+.topBar {
+    border: solid black 1px;
+    background-color: white;
+    top: 0%;
+    right: 1px;
+    width: 100%;
+    height: 12%;
+    position: fixed;
+    overflow: hidden;
+    z-index: 4;
+    .imageContainer{
+        left:0%;
+        width: 8%;
+        height: 100%;
+        position: relative;
+        .avatar {
+            margin-top:5%;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            left:80%;
 
-// .feed {
-//     background-color: red;
-//     width:50%;
-//     height: 200px;
-//     top: 40px;
-//     position: relative;
-//     margin-right: auto;
-//     margin-le    ft: auto;
-// }
+            position: relative;
+            }
+            
+    }
+    .nameLabel {
+        bottom: 92%;
+        left: 45%;
+        margin: auto;
+        font-size: 25px;
+        position: fixed;
+    }    
+}
 
-// .animateFeed {
-// }
+.navToLanding {
+    height: 5%;
+    width: 20%;
+    top: 3%;
+    left: 75%;
+    z-index: 4;
+    position: fixed;
 
+    button{
+        margin-left:10px;
+         bottom: 10px;
+          width: 90%
+    } 
+}
+
+.addPostContainer {
+    width: 52.5%;
+    height: 100px;
+    top: 12%;
+    left: 28%;
+    margin-left: 12px;
+    position: fixed;
+    z-index: 5;
+
+    button{
+        margin-left: 69% ; 
+        width: 30%; 
+        bottom: 45%;
+    }
+}
+
+.sidePanel {
+    height: 100%;
+    width: 25%;
+    top: 80px;
+    left: 1.5%;
+    position: fixed;
+    overflow-y: scroll;
+}
+
+
+.mainBody {
+    width: 80%;
+    height: 100%;
+    top: 77%;
+    left: 18%;
+    margin-left: 10px;
+    position: absolute;
+}
+.nameAndTime{
+    position: relative;
+    bottom: 40px;
+    left: 32%;
+    height: 50px;
+    width: 65%;
+    overflow:hidden;
+}
+
+.comment {
+    position: relative;
+    height: 30px;
+    width: 30%;
+    margin-left: 30%;
+    overflow:hidden; 
+    z-index: 1;
+}
+
+.ellipse{
+    position: relative;
+    bottom: 90px;
+    left: 80%;
+    height: 50px;
+    width: 12%;
+}
+
+.commentWrapper{
+    max-height: 150px;
+    overflow-y: scroll;
+    position: relative;
+}
+}

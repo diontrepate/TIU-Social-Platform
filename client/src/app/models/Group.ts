@@ -1,8 +1,9 @@
-import { Post } from './post';
+import { Post } from './Post';
 
 export interface Group {
-    id?: string;
+    groupId?: string;
     name?: string;
-    feed?: string;
+    newsInterests?: string[];
     posts?: Post[];
+    adminIdList?: string[];
 }
