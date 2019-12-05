@@ -1,5 +1,10 @@
 
 export interface Comment {
-    id: string;
-    description: string;
+    bodyText?: string;
+    commentId?: string;
+    dateCreated?: string;
+    firstName?: string;
+    lastName?: string;
+    storageItem?: string;
+    uid?: string;
 }

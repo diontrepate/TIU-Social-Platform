@@ -12,8 +12,7 @@ export class AuthGuard {
   constructor( private authService: AuthService, private router: Router ) { }
 
   canActivate( state: RouterStateSnapshot ): boolean {
-    return true;
-    if (this.authService.isValidated === true) {
+    if (this.authService.checkStorage() === true) {
       return true;
     } else {
       this.router.navigate(['/login']);

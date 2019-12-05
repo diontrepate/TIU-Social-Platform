@@ -12,10 +12,9 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  isValidated = false;
-
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+
 
   constructor(private messageService: MessageService, private http: HttpClient) {
 
@@ -31,14 +30,32 @@ export class AuthService {
    }
   // need to use Behavior subject to hold on to values for all components to use
 
+
+
   validateUser(userAuth: Auth, isFirstTime: boolean): Observable<Auth> {
     if (isFirstTime) {
+      localStorage.setItem('validated', 'true');
       return this.http.post<Auth>(SIGN_UP, userAuth);
     }
+    localStorage.setItem('validated', 'true');
     return this.http.post<Auth>(SIGN_IN, userAuth);
   }
+
+  checkStorage(): boolean {
+    if (localStorage.getItem('validated') === 'true') {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
+  clearStorage() {
+    localStorage.clear();
+  }
+
 
   sendPasswordResetEmail(userAuth: Auth): Observable<Auth> {
     return this.http.post<Auth>(FORGOT_PASSWORD_EMAIL , userAuth);
   }
+
 }

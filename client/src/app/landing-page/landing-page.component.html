@@ -5,23 +5,35 @@
         <img src="assets/avatar.png" (click)="menu.toggle($event)" alt="Avatar" class="avatar">         
     </div>
 
-    <div class="nameLabel">{{user.firstName}}</div>
+    <div class="nameLabel">{{userInfo.firstName}}</div>
 
 </div>
 
     <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
-   
+    <p-menu #post [popup]="true" [model]="postItems"></p-menu>
+    <p-menu #comment [popup]="true" [model]="commentItems"></p-menu>
+
 <div class="sidePanel">
-    <button style=" margin: 10px 5px auto; top: 10px; width: 95%" pButton type="button" (click)="showDialog();" label="Add Group" class="ui-button-rounded"></button>
-        <div *ngFor="let groups of user.groups; let i = index"> 
+
+    <p-autoComplete [(ngModel)]="chosenGroup" [suggestions]="filteredGroups" (completeMethod)="filterGroups($event)" [size]="30"
+        [minLength]="1" placeholder="Type in the group you'd like to join" [dropdown]="true">
+        <ng-template let-brand pTemplate="item">
+            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                <div style="font-size:12px; margin-top: 6px">{{brand}}</div>
+            </div>
+        </ng-template>
+    </p-autoComplete>
+
+    <button style=" margin: 10px 5px auto; top: 10px; width: 95%" pButton type="button" (click)="prepareGroupData()" label="Join Group" class="ui-button-rounded"></button>
+    <button style=" margin: 10px 5px auto; top: 10px; width: 95%" pButton type="button" (click)="showDialog();" label="Create Group" class="ui-button-rounded"></button>
+        <div *ngFor="let groups of this.userGroups; let i = index"> 
             <br>
         <div *ngIf="!mobile">
-            <p-card header=""  [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
+            <p-card header='' [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(groups.newsInterests[0]); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
                 <p-header style="margin: 40%">
-                    {{user.groups[i].name}}
+                    {{groups?.name}}
                 </p-header>
-
-        <div style="margin: 10%"> {{user.groups[i].name}} </div>
+        <div style="margin: 10%"> {{groups?.name}} </div>
 
                     <p-footer></p-footer>
              </p-card>
@@ -29,13 +41,13 @@
 
             <div *ngIf="mobile">
                 
-                <p-card header=""  [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(user.groups[i].feed); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
+                <p-card header=""  [style]="{width: '95%', height:'95px', margin:' 10px auto'}" (click)="this.isHome = false; this.getNewsForGroup(groups.newsInterests); this.passCurrentGroup(groups)" styleClass="ui-card-shadow">
                     <p-header style="margin: 40%">
-                            {{user.groups[i].name}}
+                            {{groups?.name}}
         
                     </p-header>
 
-                 <div style="margin: 10%"> {{user.groups[i].name}} </div>
+                 <div style="margin: 10%"> {{groups?.name}} </div>
 
                     <p-footer>
                 
@@ -58,19 +70,21 @@
         <div style="text-align: center">Please insert the News Interest for this group</div>
         <input style="width:95%;" formControlName="newsInterest" type="text"  placeholder="News Interest" required pInputText /> 
         <br>
-        <button style="width: 70%; margin-left: 15%; margin-top: 10%" pButton type="button" label="Submit"  class="ui-button-rounded"></button>
+        <button style="width: 70%; margin-left: 15%; margin-top: 10%" pButton (click)="addGroup()" type="button" label="Submit"  class="ui-button-rounded"></button>
 
     </div>
 
 </p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
  <!------------------------------------------Section For Feed When User Lands on Home-------------------------------------------------------------------------->
 
 <div *ngIf="isHome">
 
         <div [formGroup]="postForm" class="addPostContainer">
-            <textarea class="addPost" formControlName="post"  placeholder="Type your thoughts here..." pInputTextarea></textarea>
-            <button  pButton type="button" label="Post" (click)="this.submitPost()" class="ui-button-rounded"></button>
+            <textarea class="addPost" formControlName="generalPost"  placeholder="Type your thoughts here..." pInputTextarea></textarea>
+            <button  pButton type="button" label="Post" (click)="this.submitPost(true)" class="ui-button-rounded"></button>
         </div>
 <div class="carousel">
         <p-carousel headerText="NEWS" [autoplayInterval]="10000" [value]="items">
@@ -92,19 +106,25 @@
  
 
     <div class="mainBody">
-        <div *ngFor="let posts of user.posts; let i = index" > 
+        <div *ngFor="let posts of allPosts; let i = index" > 
             <div class="postFeedWrapper">
             <p-card  [style]="{width: '64%', height:'200px', marginLeft:'12.8%', marginTop:'5%'}" styleClass="ui-card-shadow">
                 <p-header>
                     <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
-                    <div class="nameAndTime">{{user.firstName}}<br></div>
-                    <div class="ellipse"><i class="pi pi-ellipsis-h" style="font-size: 3em"></i>
+                    <div class="nameAndTime">{{posts.firstName}}<br>{{this.reformattedDate(posts.dateCreated)}}</div>
+                    <div *ngIf="posts.firstName == userInfo.firstName">
+                    <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setPostId(posts.postId); post.toggle($event);" style="font-size: 3em"></i>
                     </div>
-                    <div class="postBody"> {{posts.description}}</div>
+                    </div>
+                    <div *ngIf="posts.firstName !== userInfo.firstName">
+                    <div class="ellipse">
+                    </div>
+                    </div>
+                    <div class="postBody">{{posts.bodyText}}</div>
                     <div class="like">  
                             
                         <i class="pi pi-thumbs-up" style="font-size: 2.2em; color: #282828"></i>
-                        <p style="margin-left:10px; margin-top:2px; font-size: 20px">1</p>
+                        <p style="margin-left:10px; margin-top:2px; font-size: 20px">{{posts.postIdList.length}}</p>
 
                     </div>
                    
@@ -118,16 +138,38 @@
             <div *ngFor="let comments of posts.comments; let i = index">
                 <div *ngIf="!mobile">
                     <p-card  [style]="{width: '65%', height:'150px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
+                           
                             <p-header>
-                          {{comments.description}}
+                                    <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                                    <div class="nameAndTime">{{comments?.firstName}}<br>{{this.reformattedDate(comments.dateCreated)}}</div>
+                                    <div *ngIf="posts.firstName == userInfo.firstName">
+                                    <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setCommentId(comments.commentId); comment.toggle($event);" style="font-size: 3em"></i>
+                                    </div>
+                                    </div>
+                                    <div *ngIf="comments.firstName !== userInfo.firstName">
+                                    <div class="ellipse">
+                                    </div>
+                                    </div>
+                                    <div class="postBody">{{comments.bodyText}}</div>
                             </p-header>
                         </p-card>
                 </div>
 
                 <div *ngIf="mobile">
                     <p-card  [style]="{width: '65%', height:'80px', marginLeft:'12.9%', backgroundColor:'#F0F0F0', 'boxShadow':'none'}" >
+                  
                             <p-header>
-                          {{comments.description}}
+                                    <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                                    <div class="nameAndTime">{{comments?.firstName}}<br>{{this.reformattedDate(comments.dateCreated)}}</div>
+                                    <div *ngIf="posts.firstName == userInfo.firstName">
+                                    <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setCommentId(comments.commentId); post.toggle($event);" style="font-size: 3em"></i>
+                                    </div>
+                                    </div>
+                                    <div *ngIf="comments.firstName !== userInfo.firstName">
+                                    <div class="ellipse">
+                                    </div>
+                                    </div>
+                                    <div class="postBody">{{comments.bodyText}}</div>
                             </p-header>
                         </p-card>
                 </div>
@@ -152,6 +194,7 @@
 </div>
 
 <!------------------------------------------Section For Feed When Group Is Selected-------------------------------------------------------------------------->
+<p-messages [value]="this.msgs"></p-messages>
 
 <div *ngIf="isGroup">
 
@@ -185,19 +228,25 @@
 
         <div class="mainBody">
 
-            <div *ngFor="let posts of groupPassed.posts; let i = index"> 
+            <div *ngFor="let posts of groupPosts; let i = index"> 
     
                     <p-card [style]="{width: '64%', height:'200px', marginLeft:'12.8%', marginTop:'5%'}" styleClass="ui-card-shadow">
                             <p-header>
                                 <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
-                                <div class="nameAndTime">{{user.firstName}}<br></div>
-                                <div class="ellipse"><i class="pi pi-ellipsis-h" style="font-size: 3em"></i>
-                                </div>
-                                <div class="postBody"> {{posts.description}}</div>
+                                <div class="nameAndTime">{{posts?.firstName}}<br>{{this.reformattedDate(posts.dateCreated)}}</div>
+                                <div *ngIf="posts.firstName == userInfo.firstName">
+                                        <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setPostId(posts.postId); post.toggle($event);" style="font-size: 3em"></i>
+                                        </div>
+                                        </div>
+                                        <div *ngIf="posts.firstName !== userInfo.firstName">
+                                        <div class="ellipse">
+                                        </div>
+                                        </div>
+                                <div class="postBody">{{posts.bodyText}}</div>
                                 <div class="like">  
                                         
                                     <i class="pi pi-thumbs-up" style="font-size: 2.2em; color: #282828"></i>
-                                    <p style="margin-left:10px; margin-top:2px; font-size: 20px">1</p>
+                                    <p style="margin-left:10px; margin-top:2px; font-size: 20px">{{posts.postIdList.length}}</p>
             
                                 </div>
                             
@@ -210,18 +259,38 @@
                         <div *ngFor="let comments of posts.comments; let i = index">
 
                             <div *ngIf="!mobile">
-                                <p-card  [style]="{width: '65%', height:'150px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
-                                        <p-header>
-                                      {{comments.description}}
-                                        </p-header>
-                                    </p-card>
+                                     
+                            <p-header>
+                                    <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                                    <div class="nameAndTime">{{comments?.firstName}}<br>{{this.reformattedDate(comments.dateCreated)}}</div>
+                                    <div *ngIf="posts.firstName == userInfo.firstName">
+                                    <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setCommentId(comments.commentId); post.toggle($event);" style="font-size: 3em"></i>
+                                    </div>
+                                    </div>
+                                    <div *ngIf="comments.firstName !== userInfo.firstName">
+                                    <div class="ellipse">
+                                    </div>
+                                    </div>
+                                    <div class="postBody">{{comments.bodyText}}</div>
+                            </p-header>
                             </div>
             
                             <div *ngIf="mobile">
                                 <p-card  [style]="{width: '65%', height:'80px', marginLeft:'12.9%', backgroundColor:'#F0F0F0'}" >
-                                        <p-header>
-                                      {{comments.description}}
-                                        </p-header>
+                                           
+                            <p-header>
+                                    <div class="profilePic"> <img src="assets/avatar.png" alt="Avatar" class="avatar" ></div>
+                                    <div class="nameAndTime">{{comments?.firstName}}<br>{{this.reformattedDate(comments.dateCreated)}}</div>
+                                    <div *ngIf="posts.firstName == userInfo.firstName">
+                                    <div class="ellipse"><i class="pi pi-ellipsis-h" (click)=" this.setCommentId(comments.commentId); post.toggle($event);" style="font-size: 3em"></i>
+                                    </div>
+                                    </div>
+                                    <div *ngIf="comments.firstName !== userInfo.firstName">
+                                    <div class="ellipse">
+                                    </div>
+                                    </div>
+                                    <div class="postBody">{{comments.bodyText}}</div>
+                            </p-header>
                                     </p-card>
             
                         </div>

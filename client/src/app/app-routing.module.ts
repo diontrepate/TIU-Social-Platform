@@ -1,3 +1,5 @@
+import { AuthService } from './services/auth.service';
+import { UploadComponent } from './upload/upload.component';
 import { HelpCenterComponent } from './help-center/help-center.component';
 import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
@@ -7,16 +9,13 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PreLandingPageComponent } from './pre-landing-page/pre-landing-page.component';
 
 const routes: Routes = [
-  { path: 'preLanding/:id', component: PreLandingPageComponent},
-  { path: 'preLanding', component: PreLandingPageComponent},
+  { path: 'preLanding/:id', component: PreLandingPageComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginPageComponent },
-  { path: '',
-  redirectTo: '/login',
-  pathMatch: 'full'
-  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'upload/:id', component: UploadComponent},
+  { path: 'upload', component: UploadComponent},
   { path: 'help' , component: HelpCenterComponent},
   { path: 'landing/:id', component: LandingPageComponent, canActivate: [AuthGuard] },
-  { path: 'landing', component: LandingPageComponent, canActivate: [AuthGuard] },
 
 ];
 

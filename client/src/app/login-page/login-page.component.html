@@ -12,7 +12,7 @@
         <br>
         <input formControlName="email" type="text"  placeholder="Email" required pInputText /> 
         <br>
-        <input formControlName="password" type="text" placeholder="Password" required pInputText/>
+        <input formControlName="password" type="password" placeholder="Password" required pInputText/>
         <br>
         <a class="formLink" (click)="forgotPassword()">Forgot password?</a>
         <br>
@@ -66,9 +66,9 @@
         <br>
         <input formControlName="email" type="text"  placeholder="Email" pInputText /> 
         <br>
-        <input formControlName="password" type="text" placeholder="Password" pInputText />
+        <input formControlName="password" type="password" pPassword placeholder="Password" pInputText />
         <br>
-        <input formControlName="confirmPass" type="text" placeholder="Confirm password" pInputText />
+        <input formControlName="confirmPass" type="password" pPassword placeholder="Confirm password" pInputText />
         <br>
         <button pButton type="button" label="Sign up" (click)="verifySignUp()" class="fullButton ui-button-rounded"></button>
         <br>

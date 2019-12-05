@@ -24,17 +24,20 @@ export class LoginPageComponent implements OnInit {
   isJustRegistered: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private messageService: MessageService) {
+
+      this.authService.clearStorage();
+
     // will work on REGEX for password soon
-    this.loginForm = this.fb.group({
+      this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
       password: ['', [Validators.required, Validators.minLength(1)]],
     });
 
-    this.forgotPasswordForm = this.fb.group({
+      this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(5)]],
     });
 
-    this.signUpForm = this.fb.group({
+      this.signUpForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(1)]],
       lastName: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.required, Validators.minLength(5)]],
@@ -62,7 +65,7 @@ export class LoginPageComponent implements OnInit {
     err => {
       this.forgotPasswordForm.reset();
       return this.messageService.add({key: 'login', severity: 'error', summary: 'Error', detail: 'An internal error has occurred'});
-  }
+    }
     );
 
   }
@@ -96,7 +99,6 @@ export class LoginPageComponent implements OnInit {
 
     this.authService.validateUser(this.userAuth, isFirstTime).subscribe(userAuthPacket => {
 
-      this.authService.isValidated = true;
       if (isFirstTime) {
       this.navToPreLanding(userAuthPacket.uid);
       } else {
@@ -106,10 +108,9 @@ export class LoginPageComponent implements OnInit {
 
     err => {
       console.log(err);
-      this.signUpForm.reset(),
-      this.loginForm.reset(),
+      this.signUpForm.reset();
+      this.loginForm.reset();
 
-      this.authService.isValidated = false;
 
       if (isFirstTime === true) {
         return this.messageService.add({key: 'login', severity: 'error', summary: 'Invalid', detail: 'That email is in use'});
